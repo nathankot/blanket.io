@@ -79,3 +79,10 @@ gulp.task('clean', function() {
 gulp.task('all', ['scripts', 'styles', 'views', 'images']);
 gulp.task('dev', ['setDevelopment', 'clean', 'scripts', 'styles', 'views', 'images']);
 gulp.task('dist', ['setProduction', 'clean', 'scripts', 'styles', 'views', 'images', 'rev']);
+
+gulp.task('default', ['dev'], function() {
+  gulp.watch('web/src/js/**/*.js', ['scripts']);
+  gulp.watch('web/src/styl/**/*/styl', ['styles']);
+  gulp.watch('web/stc/views/**/*.html', ['views']);
+  gulp.watch('web/stc/images/**/*.html', ['images']);
+});
