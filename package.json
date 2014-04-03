@@ -15,7 +15,14 @@
     "debowerify": "^0.7.0",
     "minimist": "0.0.8",
     "gulp-ngmin": "^0.1.2",
-    "gulp-uglify": "^0.2.1"
+    "gulp-uglify": "^0.2.1",
+    "gulp-stylus": "^0.1.0",
+    "gulp-csso": "^0.2.6",
+    "gulp-concat": "^2.2.0",
+    "gulp-imagemin": "^0.1.5",
+    "q": "^1.0.1",
+    "gulp-rev-all": "^0.1.0",
+    "gulp-clean": "^0.2.4"
   },
   "main": "app.js",
   "author": "Nathan Kot <me@nathankot.com> (http://nathankot.com/)",
