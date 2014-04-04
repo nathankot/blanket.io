@@ -1,4 +1,4 @@
-var angular = require('angular');
+require('angular');
 require('angular-ui-router');
 
 angular.module('rssApp', ['ui.router'])
@@ -15,3 +15,6 @@ angular.module('rssApp', ['ui.router'])
             templateUrl: 'views/landing.html'
           });
        }]);
+
+// Controllers
+require('./controllers/landing.js');

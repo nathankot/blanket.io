@@ -1,4 +1,6 @@
-var gulp = require('gulp'),
+var ENV,
+    BUILD_PATH,
+    gulp = require('gulp'),
     browserify = require('gulp-browserify'),
     ngmin = require('gulp-ngmin'),
     uglify = require('gulp-uglify'),
@@ -8,15 +10,11 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     rev = require('gulp-rev-all'),
     clean = require('gulp-clean'),
-    Q = require('q'),
-
-    ENV,
-    BUILD_PATH;
+    nodemon = require('gulp-nodemon');
 
 gulp.task('scripts', function() {
   var proc = gulp.src('web/src/js/app.js')
                 .pipe(browserify({
-                  insertGlobals: true,
                   transform: ['debowerify'],
                   debug: ENV === 'development'
                 }));
@@ -26,6 +24,15 @@ gulp.task('scripts', function() {
   }
 
   proc.pipe(gulp.dest(BUILD_PATH + '/js'));
+});
+
+gulp.task('testScripts', function() {
+  gulp.src('web/src/js/spec/bootstrap.js', { base: 'web/src/js' })
+      .pipe(browserify({
+        transform: ['debowerify'],
+        debug: ENV === 'development'
+      }))
+      .pipe(gulp.dest(BUILD_PATH + '/js'));
 });
 
 gulp.task('styles', function() {
@@ -41,8 +48,8 @@ gulp.task('styles', function() {
 });
 
 gulp.task('views', function() {
-  gulp.src('web/src/views/**/*.html')
-      .pipe(gulp.dest(BUILD_PATH + '/views'));
+  gulp.src(['web/src/views/**/*.html', 'web/src/index.html'], { base: 'web/src' })
+      .pipe(gulp.dest(BUILD_PATH));
 });
 
 gulp.task('images', function() {
@@ -77,12 +84,22 @@ gulp.task('clean', function() {
 });
 
 gulp.task('all', ['scripts', 'styles', 'views', 'images']);
-gulp.task('dev', ['setDevelopment', 'clean', 'scripts', 'styles', 'views', 'images']);
+gulp.task('dev', ['setDevelopment', 'clean', 'scripts', 'testScripts', 'styles', 'views', 'images']);
 gulp.task('dist', ['setProduction', 'clean', 'scripts', 'styles', 'views', 'images', 'rev']);
+
+gulp.task('server', function() {
+  nodemon({
+    script: 'app.js',
+    ext: 'js',
+    env: { NODE_ENV: 'development' },
+    ignore: ['web/**']
+  });
+});
 
 gulp.task('default', ['dev'], function() {
   gulp.watch('web/src/js/**/*.js', ['scripts']);
+  gulp.watch('web/src/js/spec/**/*.js', ['testScripts']);
   gulp.watch('web/src/styl/**/*/styl', ['styles']);
-  gulp.watch('web/stc/views/**/*.html', ['views']);
+  gulp.watch(['web/src/views/**/*.html', 'web/src/index.html'], ['views']);
   gulp.watch('web/stc/images/**/*.html', ['images']);
 });
