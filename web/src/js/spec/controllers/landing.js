@@ -3,13 +3,13 @@ var expect = require('chai').expect;
 
 describe('Controller: Landing', function() {
 
-  beforeEach(angular.module('rssApp'));
-
   var LandingController,
       scope;
 
+  beforeEach(angular.mock.module('rssApp'));
+
   beforeEach(inject(function($controller, $rootScope) {
-    scope = $rootScope.new();
+    scope = $rootScope.$new();
     LandingController = $controller('Landing', {
       $scope: scope
     });
