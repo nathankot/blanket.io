@@ -102,7 +102,7 @@ gulp.task('server', function() {
 gulp.task('test', function() {
   gulp.src('spec/**/*Spec.js')
       .pipe(mocha({
-        reporter: 'nyan',
+        reporter: 'min',
         bail: true
       }));
 });
