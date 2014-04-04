@@ -11,7 +11,8 @@ var ENV,
     rev = require('gulp-rev-all'),
     clean = require('gulp-clean'),
     nodemon = require('gulp-nodemon'),
-    livereload = require('gulp-livereload');
+    livereload = require('gulp-livereload'),
+    mocha = require('gulp-mocha');
 
 gulp.task('scripts', function() {
   var proc = gulp.src('web/src/js/app.js')
@@ -96,6 +97,24 @@ gulp.task('server', function() {
     env: { NODE_ENV: 'development' },
     ignore: ['web/**']
   });
+});
+
+gulp.task('test', function() {
+  gulp.src('spec/**/*Spec.js')
+      .pipe(mocha({
+        reporter: 'nyan',
+        bail: true
+      }));
+});
+
+gulp.task('watchtests', function() {
+  gulp.watch([
+    'spec/**/*.js',
+    '**/*.js',
+    '!web/**',
+    '!node_modules/**',
+    '!.git/**'
+  ], ['test']);
 });
 
 gulp.task('default', ['dev'], function() {
