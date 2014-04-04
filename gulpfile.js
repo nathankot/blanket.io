@@ -39,7 +39,7 @@ gulp.task('styles', function() {
   gulp.src('web/src/styl/*.styl')
       .pipe(stylus({
         paths: ['web/components/'],
-        use: ['nib'],
+        use: ['nib', 'axis'],
         import: ['nib'],
         set: ['linenos']
       }))
