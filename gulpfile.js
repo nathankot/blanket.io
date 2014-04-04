@@ -10,7 +10,8 @@ var ENV,
     imagemin = require('gulp-imagemin'),
     rev = require('gulp-rev-all'),
     clean = require('gulp-clean'),
-    nodemon = require('gulp-nodemon');
+    nodemon = require('gulp-nodemon'),
+    livereload = require('gulp-livereload');
 
 gulp.task('scripts', function() {
   var proc = gulp.src('web/src/js/app.js')
@@ -44,7 +45,8 @@ gulp.task('styles', function() {
         set: ['linenos']
       }))
       .pipe(csso(ENV === 'development'))
-      .pipe(gulp.dest(BUILD_PATH + '/css'));
+      .pipe(gulp.dest(BUILD_PATH + '/css'))
+      .pipe(livereload());
 });
 
 gulp.task('views', function() {
