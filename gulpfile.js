@@ -104,7 +104,7 @@ gulp.task('test', function() {
   gulp.src('spec/**/*Spec.js')
       .pipe(mocha({
         reporter: 'min',
-        bail: true
+        bail: false
       }))
       .on('error', function() {});
 });
