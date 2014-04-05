@@ -6,7 +6,7 @@ describe('Lib: normalizeUrl', function() {
   _.each({
     'news.ycombinator.com': 'http://news.ycombinator.com',
     'https://news.ycombinator.com/': 'https://news.ycombinator.com',
-    'nzherald.com/blog/rss/?query=123': 'http://nzherald.com/blog/rss',
+    'nzherald.com/blog/rss/?query=123': 'http://nzherald.com/blog/rss?query=123',
     'http://arstechnica.com/?superman&rules': 'http://arstechnica.com',
     'news.ycombinator.com/': 'http://news.ycombinator.com',
     '//news.ycombinator.com/': 'http://news.ycombinator.com'
