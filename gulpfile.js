@@ -103,8 +103,8 @@ gulp.task('test', function() {
   process.env.NODE_ENV = 'testing';
   gulp.src('spec/**/*Spec.js')
       .pipe(mocha({
-        reporter: 'min',
-        bail: false
+        reporter: 'dot',
+        bail: true
       }))
       .on('error', function() {});
 });
