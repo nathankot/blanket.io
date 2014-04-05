@@ -1,0 +1,45 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.3.6)
+    bloomfilter-rb (2.1.1)
+      redis
+    curb (0.8.5)
+    feedbag (0.9.2)
+      hpricot (>= 0.6)
+    feedjira (1.1.0)
+      curb (~> 0.8.1)
+      loofah (~> 1.2.1)
+      sax-machine (~> 0.2.1)
+    guess_html_encoding (0.0.9)
+    hpricot (0.8.6)
+    loofah (1.2.1)
+      nokogiri (>= 1.4.4)
+    mini_portile (0.5.3)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
+    ots (0.5.4)
+    redis (3.0.7)
+    rssly (0.0.1)
+      addressable (~> 2.3)
+      bloomfilter-rb (~> 2.1)
+      feedbag (~> 0.9)
+      feedjira (~> 1.1)
+      ots (~> 0.5)
+      ruby-readability (~> 0.6)
+      sanitize (~> 2.1)
+      thor
+    ruby-readability (0.6.0)
+      guess_html_encoding (>= 0.0.4)
+      nokogiri (>= 1.4.2)
+    sanitize (2.1.0)
+      nokogiri (>= 1.4.4)
+    sax-machine (0.2.1)
+      nokogiri (~> 1.6.0)
+    thor (0.19.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rssly
