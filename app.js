@@ -51,8 +51,6 @@ if (cluster.isMaster) {
     app.use(express.static(path.join(__dirname, 'web', 'dist')));
   }
 
-  require('./config/mongoose.js')(app);
-
   http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
   });
