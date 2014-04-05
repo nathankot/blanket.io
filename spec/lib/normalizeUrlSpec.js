@@ -2,7 +2,7 @@ var normalizeUrl = require('../../lib/normalizeUrl.js'),
     expect = require('chai').expect,
     _ = require('lodash');
 
-describe.only('Lib: normalizeUrl', function() {
+describe('Lib: normalizeUrl', function() {
   _.each({
     'news.ycombinator.com': 'http://news.ycombinator.com',
     'https://news.ycombinator.com/': 'https://news.ycombinator.com',
