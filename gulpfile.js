@@ -111,10 +111,9 @@ gulp.task('test', function() {
 gulp.task('watchtests', function() {
   gulp.watch([
     'spec/**/*.js',
-    '**/*.js',
-    '!web/**',
-    '!node_modules/**',
-    '!.git/**'
+    'lib/**/*.js',
+    'routes/**/*.js',
+    'models/**/*.js',
   ], ['test']);
 });
 
