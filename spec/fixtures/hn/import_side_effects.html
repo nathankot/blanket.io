@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<meta charset=utf-8>
+	<title>Say “no” to import side‐effects in Python · Chris Morgan</title>
+	<meta name=author content="Chris Morgan">
+	<meta name=viewport content="width=device-width; initial-scale=1.0">
+	<link rel=icon href="/media/images/favicon.png">
+	<link href="/blog.xml" type=application/atom+xml rel=alternate title="Chris Morgan’s blog">
+	<link rel=stylesheet href="/media/css/site.css">
+	<link rel=stylesheet href="/media/css/syntax.css">
+	</head>
+<body id="say-no-to-import-side-effects-in-python">
+	<header>
+		<nav><ul><li><a class=jump-to-content href=#main>Jump to content</a></li></ul></nav>
+		<h1><a href="/">Chris Morgan</a></h1>
+		<p>I’m a software developer, dealing mostly in web things.
+		<p>I’m also (more importantly) a committed Christian—please talk to me at any time about that.
+				<nav class=main_nav>
+    <ul>
+                <li><a title="About me, projects I’ve worked on, &amp;c." href="/about.html">About</a>        <li><a title="Things I’ve written just for your enjoyment. Unless it was for mine." class="active" href="/blog/">Blog</a>    </ul>
+</nav>
+				<h2>Elsewhere</h2>
+		<ul class=elsewhere>
+			<li><a data-icon=github href=https://github.com/chris-morgan>chris-morgan</a>
+			<li><a data-icon=twitter href=https://twitter.com/__chrismorgan><span>@</span>__chrismorgan</a>
+			<li><a data-icon=stackoverflow href=http://stackoverflow.com/users/497043/chris-morgan>Chris Morgan</a>
+			<li><a data-icon=email href=mailto:me@chrismorgan.info>me@chrismorgan.info</a>
+			<li><a data-icon=facebook title="I’m already too good at wasting time. Staying off Facebook has been a very deliberate choice.">not applicable</a>
+		</ul>
+	</header>
+	<main id=main>
+		<article class=post>
+<h1>Say “no” to import side‐effects in Python</h1>
+<time datetime=2014-04-05>
+    <strong>Posted:</strong> April 05, 2014
+</time>
+
+<ul class="tags clear">
+<li><a class=tag href="/blog/tags/python.html">python</a></li>
+</ul>
+<p class=summary>When you write Python code, <pretty-please with-sugar-on-top>please</pretty-please> don’t have side‐effects in your module imports.
+
+<p>I must be able to import your module—<em>any</em> module—at any time without anything breaking.
+
+<p>Here’s an example of the type of problem that import side‐effects causes,<!-- yes, that comma is deliberate! --> on my laptop which has accumulated almost five years of Things of Diverse Character<!-- and Disposition -->:
+
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="s">&#39;modules&#39;</span><span class="p">)</span><br />&nbsp;<br /><span class="go">Please wait a moment while I gather a list of all available modules...</span><br />&nbsp;<br /><br /><span class="go">WARNING: Running on Linux, but cannot use Epoll Twisted reactor.</span><br />&nbsp;<br /><span class="go"> =&gt; reactor already installed</span><br />&nbsp;<br /><span class="go">Will let Twisted choose a default reactor (potential performance degradation).</span><br />&nbsp;<br /><span class="go">WARNING:OpenGL.Tk:Expected Tk Togl installation in /usr/lib/python2.7/dist-packages/OpenGL/Tk/togl-linux2-64</span><br /><span class="go">/usr/lib/python2.7/dist-packages/gtk-2.0/gtk/__init__.py:127: RuntimeWarning: PyOS_InputHook is not available for interactive use of PyGTK</span><br /><span class="go">  set_interactive(1)</span><br /><span class="go">[1]    9098 segmentation fault (core dumped)  python</span><br /></pre></div><br />
+<p>The first time I ran it today, it took upwards of a minute before it got to the segfault. Immediately after, with a hot cache, it still took almost ten seconds to get there—things are simply doing too much at import time.
+
+<p>gdb reveals, by the way, that the segfault is in <code>libQtGui.so.4</code>, because <code>/usr/lib/python2.7/dist-packages/frescobaldi_app/icons/__init__.py</code> saw fit to call <code>QIcon.themeSearchPaths()</code> (with no <code>QApplication</code> set up, which Qt requires), something it flatly shouldn’t be doing at import time.
+
+<p>Python has tried to provide a useful feature in <code>help('modules')</code>, but other programmers have scuppered it by their laziness and lack of conformance to Best Practices™.
+
+<p>Last time I tried <code>help('modules')</code> I didn’t have Frescobaldi installed; at that time, some GUI tests of some form ran, so I had a handful of windows popping up about the place briefly. It still crashed somewhere later, can’t remember where.
+
+<p>… and it only got that far because I had already removed a piece of code (from rst2pdf, I think it was) which had tests which, were the environment not set up to its satisfaction (specifically, it wanted to be in its source repository—the file was not supposed to have been installed) raised <code>SystemExit</code>.
+
+<p>You see, at that time I wanted to see if I could get <code>help('modules')</code> to work.
+
+<p>I gave up.
+
+<!-- Please tell me if you spot this. I'd love to know. It makes such endeavours worth it! -->
+<style>
+pretty-please{font-style:italic}
+pretty-please:before{content:"please, ";font-style:normal}
+/* You only get a third "please" with with-sugar-on-top ☺ */
+pretty-please[with-sugar-on-top]:after{content:", please"}
+</style>
+
+<p class=post-contact>Comments? Questions? Corrections? If you want to contact me about anything in this post, write to me at <a href=https://twitter.com/__chrismorgan>@__chrismorgan</a> or <a href="mailto:me@chrismorgan.info">email me</a>.</p>
+<nav class="post_nav clear">
+<a class="prev disabled"
+        >
+    	No newer posts
+	</a>
+
+<a class=backlink href="/blog">Back to list</a>
+
+<a class="next"
+            href="/blog/rust-docs-vision-presentation-internals.html">
+        Older: The tech behind my Rust docs presentation
+	</a>
+</nav>
+</article>	</main>
+
+	<footer>
+		<p>© 2013 Chris Morgan; licensed <a rel=license href=http://creativecommons.org/licenses/by/3.0/>CC-BY</a>.
+		<p>If you find anything I made helpful,<br class=hide-for-small> I’d love to hear from you!
+	</footer>
+	<script>_gaq=[['_setAccount','UA-27924399-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=true;g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s);})(document,'script');</script></body>
+</html>

@@ -1,0 +1,25 @@
+<rss version="2.0">
+    <channel>
+        <title>Hacker News</title>
+        <link>https://news.ycombinator.com/</link>
+        <description>Links for the intellectually curious, ranked by readers.</description>
+        <item>
+            <title>Opal: Ruby in Your Browser – the Basics</title>
+            <link>http://www.sitepoint.com/opal-ruby-browser-basics/</link>
+            <comments>https://news.ycombinator.com/item?id=7536260</comments>
+            <description><![CDATA[<a href="https://news.ycombinator.com/item?id=7536260">Comments</a>]]></description>
+        </item>
+        <item>
+            <title>Say “no” to import side‐effects in Python</title>
+            <link>http://chrismorgan.info/blog/say-no-to-import-side-effects-in-python.html</link>
+            <comments>https://news.ycombinator.com/item?id=7536246</comments>
+            <description><![CDATA[<a href="https://news.ycombinator.com/item?id=7536246">Comments</a>]]></description>
+        </item>
+        <item>
+            <title>Tesla Model S Ethernet Network Explored</title>
+            <link>http://www.dragtimes.com/blog/tesla-model-s-ethernet-network-explored-possible-jailbreak-in-the-future</link>
+            <comments>https://news.ycombinator.com/item?id=7535128</comments>
+            <description><![CDATA[<a href="https://news.ycombinator.com/item?id=7535128">Comments</a>]]></description>
+        </item>
+    </channel>
+</rss>

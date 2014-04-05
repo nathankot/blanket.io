@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" ><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en" ><!--<![endif]-->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:image" content="http://www.sitepoint.com/wp-content/themes/sitepoint/assets/images/icon.ruby.png">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="apple-touch-icon-precomposed" href="/wp-content/themes/sitepoint/assets/images/apple-touch-icon-57x57-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/wp-content/themes/sitepoint/assets/images/apple-touch-icon-72x72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/wp-content/themes/sitepoint/assets/images/apple-touch-icon-114x114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/wp-content/themes/sitepoint/assets/images/apple-touch-icon-144x144-precomposed.png" />
+
+        <link href="https://plus.google.com/+sitepoint" rel="publisher" />
+        <meta property="twitter:account_id" content="15743570" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <script type="text/javascript">
+    function r(f){/in/.test(document.readyState)?setTimeout(r,9,f):f()}
+    </script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30131-1']);
+  _gaq.push(['_setCustomVar', 1, 'Context', 'post', 3]);
+_gaq.push(['_setCustomVar', 2, 'Channel', 'Ruby', 3]);
+_gaq.push(['_setCustomVar', 3, 'Primary Category', 'Ruby', 3]);
+_gaq.push(['_setCustomVar', 4, 'Published date', '2014-04-04', 3]);
+_gaq.push(['_setCustomVar', 5, 'Author', 'Benjamin Tan Wei Hao', 3 ]);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+    <script type="text/javascript">
+      var googletag = googletag || {};
+      googletag.cmd = googletag.cmd || [];
+      (function() {
+      var gads = document.createElement('script');
+      gads.async = true;
+      gads.type = 'text/javascript';
+      var useSSL = 'https:' == document.location.protocol;
+      gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+      var node = document.getElementsByTagName('script')[0];
+      node.parentNode.insertBefore(gads, node);
+      })();
+    </script>
+
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.4.24 - http://yoast.com/wordpress/seo/ -->
+<title>Opal: Ruby in Your Browser, the Basics</title>
+<link rel="canonical" href="http://www.sitepoint.com/opal-ruby-browser-basics/" />
+<link rel="author" href="https://plus.google.com/+BenjaminTanWeiHao"/>
+<link rel="publisher" href="https://plus.google.com/+sitepoint/"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Opal: Ruby in Your Browser, the Basics" />
+<meta property="og:description" content="I love Ruby, and it is my go-to language for building web applications. Unfortunately, when dealing with the browser, Javascript is a necessary evil. As you can see, I am not a huge fan. So when someone comes along offering a way to use Ruby on the browser, sign me up!" />
+<meta property="og:url" content="http://www.sitepoint.com/opal-ruby-browser-basics/" />
+<meta property="og:site_name" content="SitePoint" />
+<meta property="article:publisher" content="https://www.facebook.com/sitepoint" />
+<meta property="article:section" content="Gems" />
+<meta property="article:section" content="Ruby" />
+<meta property="article:section" content="Ruby Tutorials" />
+<meta property="article:published_time" content="2014-04-04T06:30:12+00:00" />
+<meta property="article:modified_time" content="2014-03-29T11:45:47+00:00" />
+<meta property="og:image" content="https://secure.gravatar.com/avatar/88298620949a6534d403da2e356c9339?s=420&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-org-420.png?v=109363" />
+<meta property="og:image" content="http://i.imgur.com/N1fMy4b.png" />
+<meta property="og:image" content="http://www.conwaylife.com/w/images/e/e2/Lwss.png" />
+<meta property="og:image" content="http://www.conwaylife.com/w/images/2/21/Lwss.gif" />
+<meta property="og:image" content="http://i.imgur.com/HZdLnuE.png" />
+<meta property="og:image" content="http://i.imgur.com/iyEoq8M.png" />
+<meta property="og:image" content="http://imgur.com/39pRKcC.png" />
+<meta property="og:image" content="http://imgur.com/ZPEKTPs.png" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:domain" content="SitePoint"/>
+<meta name="twitter:creator" content="@bentanweihao"/>
+<!-- / Yoast WordPress SEO plugin. -->
+
+<link rel="alternate" type="application/rss+xml" title="SitePoint &raquo; Opal: Ruby in Your Browser, the Basics Comments Feed" href="http://www.sitepoint.com/opal-ruby-browser-basics/feed/" />
+<link rel='stylesheet' id='sitepoint-fonts-css'  href='//fonts.googleapis.com/css?family=Noto+Sans%3A400%2C700&#038;ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='sitepoint-styles-css'  href='http://www.sitepoint.com/wp-content/themes/sitepoint/assets/stylesheets/styles-f28b43ac52ec68fffa00d1afa414f6e8.css?ver=3.8.1' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.sitepoint.com/wp-content/themes/sitepoint/assets/javascripts/scripts-head-e4a2be27db699092d2993e42901cedf6.js?ver=3.8.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.sitepoint.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.sitepoint.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 3.8.1" />
+<link rel='shortlink' href='http://www.sitepoint.com/?p=79130' />
+
+<!--Plugin WP Missed Schedule 2013.1231.2013 Active - Tag 6707293c0218e2d8b7aa38d418ffa608-->
+
+<!-- This site is patched which an important unfixed problem since WordPress 2.5+ to 3.9+ -->
+
+<!-- wp-parsely Plugin Version 1.5 -->
+<meta name='wp-parsely_version' id='wp-parsely_version' content='1.5' />
+<meta name='parsely-page' id='parsely-page' content='{"title":"Opal: Ruby in Your Browser, the Basics","link":"http:\/\/www.sitepoint.com\/opal-ruby-browser-basics\/","image_url":"","type":"post","post_id":"79130","pub_date":"2014-04-04T13:30:12Z","section":"Ruby","author":"Benjamin Tan Wei Hao","tags":["ruby\/gems","ruby\/ruby tutorials"]}' />
+<script type="text/javascript">
+    googletag.cmd.push(function() {
+		googletag.defineSlot("/7448792/SP2013_Articles_300x250_1", [300, 250], "div-gpt-ad-1392428092543-0").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/SP2013_Articles_728x90_1", [728, 90], "div-gpt-ad-article-header").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/SP2013_Articles_300x600_1", [300, 600], "div-gpt-ad-1392428092543-4").addService(googletag.pubads());
+		googletag.pubads().setTargeting("channel", "Ruby");
+		googletag.pubads().setTargeting("post_id", "79130");
+		googletag.pubads().setTargeting("OpenX",["true", "false"]);
+		googletag.pubads().setTargeting("Tribal",["true", "false"]);
+		googletag.pubads().enableSingleRequest();
+        googletag.pubads().collapseEmptyDivs();
+        googletag.enableServices();
+    });
+</script>
+        <style type="text/css" id="syntaxhighlighteranchor"></style>
+    <!--[if lt IE 9]>
+      <script src="/wp-content/themes/sitepoint/assets/javascripts/vendor/respond.custom.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <header class="main-header" role="banner">
+      <nav class="top-bar" role="navigation">
+        <ul class="title-area">
+          <li class="name">
+            <div class="logo">
+              <a class="logomark" href="http://www.sitepoint.com" tabindex="1">
+                <img src="http://www.sitepoint.com/wp-content/themes/sitepoint/assets/svg/sitepoint.svg" alt="SitePoint">
+              </a>
+            </div>
+          </li>
+          <li class="toggle-topbar menu-icon">
+            <a href="#"><span>Menu</span></a>
+          </li>
+        </ul>
+
+        <section class="top-bar-section">
+          <ul class="right">
+            <li class="has-dropdown">
+              <a href="#" tabindex="-1">Topics</a>
+              <ul class="dropdown">
+                <li>
+                  <a class="category-html menuitem" href="http://www.sitepoint.com/html/">HTML</a>
+                </li>
+                <li>
+                  <a class="category-css menuitem" href="http://www.sitepoint.com/css/">CSS</a>
+                </li>
+                <li>
+                  <a class="category-javascript menuitem" href="http://www.sitepoint.com/javascript/">JS</a>
+                </li>
+                <li>
+                  <a class="category-php menuitem" href="http://www.sitepoint.com/php/">PHP</a>
+                </li>
+                <li>
+                  <a class="category-ruby menuitem" href="http://www.sitepoint.com/ruby/">Ruby</a>
+                </li>
+                <li>
+                  <a class="category-mobile menuitem" href="http://www.sitepoint.com/mobile/">Mobile</a>
+                </li>
+                <li>
+                  <a class="category-ux menuitem" href="http://www.sitepoint.com/ux/">UX</a>
+                </li>
+                <li>
+                  <a class="category-design menuitem" href="http://www.sitepoint.com/design/">Design</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="/store/" tabindex="2">Store</a>
+            </li>
+            <li>
+              <a href="/forums/" tabindex="2">Forums</a>
+            </li>
+            <li>
+              <a href="/newsletter" tabindex="3">Subscribe</a>
+            </li>
+            <li class="top-bar_search">
+              <form method="get" action="http://www.sitepoint.com/">
+                <input autocomplete="off" class="searchquery" id="search-box" name="s" placeholder="Search&hellip;" type="text" tabindex="4">
+                <button tabindex="-1"></button>
+              </form>
+            </li>
+          </ul>
+        </section>
+      </nav>
+    </header>
+<div class="awesome-bar" data-campaign="newrelic" style="background:#038D98;">
+  <a class="awesome-bar_container" target="_blank" href="http://newrelic.com/lp/brand2?utm_source=SITE&utm_medium=banner_ad&utm_content=hellobar&utm_campaign=q2banners&mpc=BA-SITE-RPM-en-100-nerdlife-hellobar">
+    <img class="awesome-bar_brand" src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2013/09/NewRelic-logo-w.png" alt="New Relic" style="height:22px;">
+    <span class="awesome-bar_message" style="color:#fff;">URGENT NERD ALERT: Optimize your apps now to get a nerdtastic t-shirt.</span>
+    <span class="button small radius awesome-bar_action" style="background:#78cbd1;">nerd me now</span>
+  </a>
+  <span class="awesome-bar_close">x</span>
+</div><main role="main" class="page page--primary category-ruby">
+
+  <header role="banner" class="page_banner page_banner--category">
+    <h2 class="page_banner_title">
+      <a href="http://www.sitepoint.com/ruby/"><i class="icon-category"></i>Ruby</a>
+          </h2>
+    <div class="page_banner_adspot">
+      <div class="widget maestro maestro-content-type-ad hide-for-small" id="maestro-product-37"><!-- SP2013_Articles_728x90_1 -->
+<div id="div-gpt-ad-article-header" style="width:728px; height:90px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-article-header"); });</script>
+ </div></div>          </div>
+  </header>
+
+      <article class="page_content article" id="post-79130">
+      <header class="article_header">
+        <h1 class="article_title">Opal: Ruby in Your Browser, the Basics</h1>
+        <div class="contributor article_contributor">
+              <figure class="contributor_avatar article_author-avatar">
+      <a href="http://www.sitepoint.com/author/btan/">
+        <img alt='' src='http://1.gravatar.com/avatar/f3fe8fa67ae6dbc1d19189e80c9e96a2?s=96&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D96&amp;r=G' class='avatar avatar-96 photo' height='96' width='96' />      </a>
+    </figure>
+    <p class="contributor_name article_author-name">
+      <a href="http://www.sitepoint.com/author/btan/">Benjamin Tan Wei Hao</a>
+    </p>
+    <p class="contributor_title article_author-title"></p>
+            </div>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="sitepointdotcom" data-size="large" data-count="none" data-dnt="true">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <div class="article_meta-data">
+          <p class="article_pub-date">Published <time datetime="2014-04-04" pubdate>April 4, 2014</time></p>
+        </div>
+      </header>
+
+      <section class="article_body">
+
+          <p><img src="https://secure.gravatar.com/avatar/88298620949a6534d403da2e356c9339?s=420&#038;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-org-420.png?v=109363" width="420" height="420" class="alignleft" />
+<p>I love Ruby, and it is my go-to language for building web applications. Unfortunately, when dealing with the browser, Javascript is a necessary evil. As you can see, I am not a huge fan.</p>
+<p>So when someone comes along offering a way to use Ruby on the browser, sign me up!</p>
+<p>In the first part of this article, I will introduce Opal and show how to get Opal set up. After that, we&#8217;ll dive in and implement the first half of our example application. (I will keep you in suspense for now, unless you scroll down, which will spoil the fun.)</p>
+<h2>Hello, Opal!</h2>
+<p>That someone who came along happens to be <a href="https://github.com/adambeynon">Adam Beynon</a>, creator of <a href="https://github.com/opal/opal">Opal</a>. Opal is a Ruby to Javascript source-to-source compiler. In other words, Opal translates the Ruby that you write into Javascript.</p>
+<h2>Getting Opal</h2>
+<p>Fire up a terminal:</p>
+<pre class="brush: bash; title: ; notranslate" title="">
+% gem install opal opal-jquery
+Successfully installed opal-0.6.0
+Successfully installed opal-jquery-0.2.0
+2 gems installed
+</pre>
+<p>Notice that we are also installing <code>opal-jquery</code>. This gem wraps jQuery and provides a Ruby syntax to interact with the DOM. More on that later.</p>
+<p>Let&#8217;s give Opal in spin in <code>irb</code>:</p>
+<pre class="brush: bash; title: ; notranslate" title="">
+% irb
+&gt; require 'opal'
+=&gt; true
+&gt; Opal.compile(&quot;3.times { puts 'Ohai, Opal!' }&quot;)
+=&gt; &quot;/* Generated by Opal 0.6.0 */\n(function($opal) {\n  var $a, $b, TMP_1, self = $opal.top, $scope = $opal, nil = $opal.nil, $breaker = $opal.breaker, $slice = $opal.slice;\n\n  $opal.add_stubs(['$times', '$puts']);\n  return ($a = ($b = (3)).$times, $a._p = (TMP_1 = function(){var self = TMP_1._s || this;\n\n  return self.$puts(\&quot;Ohai, Opal!\&quot;)}, TMP_1._s = self, TMP_1), $a).call($b)\n})(Opal);\n&quot;
+</pre>
+<h2>Conway&#8217;s Game of Life in Opal</h2>
+<p>It&#8217;s time to get our hands dirty and feet wet with Opal. I have always wanted a reason to build <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Conway&#8217;s Game of Life</a>, so that&#8217;s our goal.</p>
+<p>In case you are not familiar with Conway&#8217;s Game of Life (or too lazy to read the Wikipedia entry):</p>
+<p>It starts with an empty grid of square cells. Every cell is either <em>alive</em> or <em>dead</em>. Each cell interacts with its <em>eight</em> neighbors. </p>
+<p><img src="http://i.imgur.com/N1fMy4b.png" width="210" height="210" class="alignnone" /></p>
+<p>Here, there 5 cells that are alive. The rest are dead. The cell marked with a blue dot is shown together with its 8 neighbors marked with red dots.</p>
+<p>At each <em>tick</em>, a cell can undergo a transition based on four rules:</p>
+<h3>Rule 1</h3>
+<p>Any live cell with fewer than two live neighbors dies, as if caused by <em>under-population</em>.</p>
+<h3>Rule 2</h3>
+<p>Any live cell with two or three live neighbors lives on to the next generation.</p>
+<h3>Rule 3</h3>
+<p>Any live cell with more than three live neighbors dies, as if by <em>overcrowding</em>.</p>
+<h3>Rule 4</h3>
+<p>Any dead cell with exactly three live neighbors becomes a live cell, as if by <em>reproduction</em>.</p>
+<p>Amazingly, with just these 4 simple rules we can observe very interesting patterns. Here&#8217;s an example, called the <em>lightweight spaceship</em>, taken from <a href="http://www.conwaylife.com">ConwayLife.com</a>:</p>
+<p><img src="http://www.conwaylife.com/w/images/e/e2/Lwss.png" width="113" height="97" class="alignnone" /></p>
+<p>Here is the spaceship in action:</p>
+<p><img src="http://www.conwaylife.com/w/images/2/21/Lwss.gif" width="146" height="114" class="alignnone" /></p>
+<h2>Setting up</h2>
+<p>Go ahead an create an empty directory, call it <code>conway_gol</code>, and create the following directory structure:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+├── Gemfile
+├── Rakefile
+├── app
+│   ├── conway.rb
+├── index.html
+└── styles.css
+</pre>
+<h3>1. Gemfile</h3>
+<p>Populate your Gemfile to look like this:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+source 'https://rubygems.org'
+
+gem 'opal'
+gem 'opal-jquery'
+gem 'guard'
+gem 'guard-rake'
+</pre>
+<p>After that, install the gems:</p>
+<pre class="brush: bash; title: ; notranslate" title="">
+% bundle install
+</pre>
+<h3>2. Setting Up Guard</h3>
+<p>Notice that we&#8217;re including the <code>guard</code> gem. </p>
+<p>Guard is extremely handy for development with Opal. Since Opal is a <em>compiler</em>, it needs to compile the Ruby code that you have written into Javascript. Therefore, each time you make changes, you recompile the source.Guard makes this process slightly easier.</p>
+<p>Guard watches certain files or directories based on rules set in a <code>Guardfile</code>, which we shall create shortly. It also comes with a bunch of handy plugins. For example, <code>guard-rake</code> runs a Rake task when files change.</p>
+<p>Next, in the <code>conway_gol</code> directory, create a <code>Guardfile</code> using the following command:</p>
+<pre class="brush: bash; title: ; notranslate" title="">
+% bundle exec guard init
+00:30:21 - INFO - rake guard added to Guardfile, feel free to edit it
+</pre>
+<p>Include this rule in your <code>Guardfile</code>. </p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+guard 'rake', :task =&gt; 'build' do
+  watch %r{^app/.+\.rb$}
+end
+</pre>
+<p>This watches for any changes in <em>any</em> Ruby file in the <code>app</code> directory. Such a change will trigger the <code>rake build</code> task, which we will write next.</p>
+<h3>3. Setting Up the Rakefile</h3>
+<p>In <code>Rakefile</code>:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+require 'opal'
+require 'opal-jquery'
+
+desc &quot;Build our app to conway.js&quot;
+task :build do
+  env = Opal::Environment.new
+  env.append_path &quot;app&quot;
+
+  File.open(&quot;conway.js&quot;, &quot;w+&quot;) do |out|
+    out &lt;&lt; env[&quot;conway&quot;].to_s
+  end
+end
+</pre>
+<p>Here is what the <code>build</code> Rake task does:</p>
+<ol>
+<li>Sets up the directory to which the Ruby files are stored</li>
+<li>Creates <code>conway.js</code>, the result of the Ruby -> Javascript compilation.</li>
+</ol>
+<h3>4. Static Files</h3>
+<p>In <code>index.html</code>:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script src=&quot;http://code.jquery.com/jquery-1.11.0.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;http://code.jquery.com/jquery-migrate-1.2.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;canvas id=&quot;conwayCanvas&quot;&gt;&lt;/canvas&gt;
+    &lt;script src=&quot;conway.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>We need jQuery. We are also using the HTML5 <code>canvas</code> element, so the usual &#8220;this will not work on older versions of Internet Explorer&#8221; disclaimer applies. </p>
+<p>Lastly, we put the Opal-generated <code>conway.js</code> <em>below</em> the canvas element. This is so the canvas element is available to <code>conway.js</code>.</p>
+<p>In <code>styles.css</code>:</p>
+<pre class="brush: css; title: ; notranslate" title="">
+* {
+  margin: 0;
+  padding: 0;
+}
+</pre>
+<p>This style gets rid of any gaps at the border when our grid is drawn.</p>
+<h3>5. Working with Opal</h3>
+<p>Before we use Guard to automate the process, here is an example on how you would interact with Opal:</p>
+<p>Go to <code>app/conway.rb</code>, and type this in:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+x = (0..3).map do |n|
+      n * n * n
+    end.reduce(:+)
+puts x
+</pre>
+<p>In your terminal, under the <code>conway_gol</code> directory, run the Rake task:</p>
+<pre class="brush: bash; title: ; notranslate" title="">
+% rake build
+</pre>
+<p>Open <code>index.html</code>. The result appears on the developer console of your browser. Here is what it looks like in Chrome:</p>
+<p><img src="http://i.imgur.com/HZdLnuE.png" width="667" height="251" class="alignnone" /></p>
+<p>Just for kicks, go see what the generated <code>conway.js</code> looks like. While you admire the generated Javascript, take a moment to reflect on the brilliance of the Opal team.</p>
+<p>Since we have Guard all set up, in <em>another</em> terminal window, run this command:</p>
+<pre class="brush: bash; title: ; notranslate" title="">
+% bundle exec guard
+01:11:39 - INFO - Guard is using TerminalTitle to send notifications.
+01:11:39 - INFO - Starting guard-rake build
+01:11:39 - INFO - running build
+
+01:11:41 - INFO - Guard is now watching at '/Users/Ben/conway_gol'
+[1] guard(main)&gt;
+</pre>
+<p>Here&#8217;s a tip: Anytime you want to re-run <code>rake build</code>, simply press &#8216;Enter&#8217; in the Guard terminal window:</p>
+<pre class="brush: bash; title: ; notranslate" title="">
+[1] guard(main)&gt; (Hit Enter)
+01:13:42 - INFO - Run all
+01:13:42 - INFO - running build
+</pre>
+<p>Try making a change in <code>conway.rb</code>:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+x = (0..3).map do |n|
+      n * n * n
+    end.reduce(:*) # &lt;- change to this
+puts x
+</pre>
+<p>Observe that, when you save <code>conway.rb</code> (or any Ruby file for that matter), the terminal window running Guard outputs this message:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+09:25:11 - INFO - running build
+</pre>
+<p>Refreshing the browser will display the updated value.</p>
+<p>Now that we have made sure everything works, go ahead and delete everything in <code>conway.rb</code> – The fun begins now!</p>
+<h2>Let the Games Begin!</h2>
+<p>Our application will consist of 2 major components. The first piece is the game logic. The second piece is drawing of the canvas and handling canvas events. </p>
+<p>Let&#8217;s tackle the second piece first.</p>
+<h3>1. Drawing a Blank Grid</h3>
+<p>This is what we&#8217;re shooting for:</p>
+<p><img src="http://i.imgur.com/iyEoq8M.png" width="720" height="444" class="alignnone" /></p>
+<p>The grid lines cover the entire browser viewport. This means that we need to access the height and width of the this viewport. More importantly, we need to access the canvas element on the DOM before we can start drawing anything.</p>
+<h4>The <code>Grid</code> Class</h4>
+<p>Open <code>conway.rb</code> in <code>app</code>, and fill it in with this:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+require 'opal'
+require 'opal-jquery'
+
+class Grid
+  attr_reader :height, :width, :canvas, :context, :max_x, :max_y
+
+  CELL_HEIGHT = 15;
+  CELL_WIDTH  = 15;
+
+  def initialize
+    @height  = `$(window).height()`
+    @width   = `$(window).width()`
+    @canvas  = `document.getElementById(#{canvas_id})`
+    @context = `#{canvas}.getContext('2d')`
+    @max_x   = (height / CELL_HEIGHT).floor
+    @max_y   = (width / CELL_WIDTH).floor
+  end
+
+  def draw_canvas
+    `#{canvas}.width  = #{width}`
+    `#{canvas}.height = #{height}`
+
+    x = 0.5
+    until x &gt;= width do
+      `#{context}.moveTo(#{x}, 0)`
+      `#{context}.lineTo(#{x}, #{height})`
+      x += CELL_WIDTH
+    end
+
+    y = 0.5
+    until y &gt;= height do
+      `#{context}.moveTo(0, #{y})`
+      `#{context}.lineTo(#{width}, #{y})`
+      y += CELL_HEIGHT
+    end
+
+    `#{context}.strokeStyle = &quot;#eee&quot;`
+    `#{context}.stroke()`
+  end
+
+  def canvas_id
+    'conwayCanvas'
+  end
+
+end
+
+grid = Grid.new
+grid.draw_canvas
+</pre>
+<p>We need to explicitly require <code>opal</code> and <code>opal-jquery</code>.</p>
+<p>The <code>Grid</code> class looks <em>mostly</em> like Ruby. At first glance, we have all the usual Ruby syntax. Let&#8217;s look at each part of this class in slightly more detail, starting with <code>initialize</code>.</p>
+<h5><code>initialize</code></h5>
+<pre class="brush: ruby; title: ; notranslate" title="">
+class Grid
+  attr_reader :height, :width, :canvas, :context, :max_x, :max_y
+
+  CELL_HEIGHT = 15;
+  CELL_WIDTH  = 15;
+
+  def initialize
+    @height  = `$(window).height()`
+    @width   = `$(window).width()`
+    @canvas  = `document.getElementById(#{canvas_id})`
+    @context = `#{canvas}.getContext('2d')`
+    @max_x   = (height / CELL_HEIGHT).floor
+    @max_y   = (width / CELL_WIDTH).floor
+  end
+
+  def canvas_id
+    'conwayCanvas'
+  end
+
+  ### snip snip ###
+end
+</pre>
+<p>In Opal, we can evaluate Javascript directly in back-ticks. For instance, to get the height of the browser viewport:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+@height  = `$(window).height()`
+</pre>
+<p>Opal stores the value of <code>@height</code> as a <code>Numeric</code> Ruby class. We are also using <code>$</code>, which is calling a jQuery instance.</p>
+<h5>Working with Canvas</h5>
+<p>Don&#8217;t worry if you have never worked with the <code>canvas</code> element before, since that&#8217;s not the main point of this article, anyway. Everything I know about <code>canvas</code> came from <a href="http://diveintohtml5.info/canvas.html">Dive Into HTML5</a>.</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+@canvas  = `document.getElementById(#{canvas_id})`
+</pre>
+<p>To work with the canvas, you need a reference to it in the DOM. Look at how we can use string interpolation to fill in the canvas id via a <code>canvas_id</code> method call.</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+@context = `#{canvas}.getContext('2d')`
+</pre>
+<p>More importantly, every canvas has a drawing <em>context</em>. All the drawing is done via this context. Notice how we use string interpolation once again to pass in <code>canvas</code>, retrieve the context, and store it in <code>@context</code>.</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+@max_x   = (height / CELL_HEIGHT).floor
+@max_y   = (width / CELL_WIDTH).floor
+</pre>
+<p><code>@max_x</code> and <code>@max_y</code> store the limits of the grid in terms of coordinates, which explains why we need to divide by <code>CELL_HEIGHT</code> and <code>CELL_WIDTH</code>.</p>
+<h5><code>draw_canvas</code></h5>
+<p>This is how we draw the grid lines on the canvas. <code>canvas</code> is only called to set the width and height. All the drawing is handled with function calls to <code>context</code>. </p>
+<p><code>draw_canvas</code> is a nice example of how Opal lets you use Ruby and Javascript code together in perfect harmony.</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+def draw_canvas
+  `#{canvas}.width  = #{width}`
+  `#{canvas}.height = #{height}`
+
+  x = 0.5
+  until x &gt;= width do
+    `#{context}.moveTo(#{x}, 0)`
+    `#{context}.lineTo(#{x}, #{height})`
+    x += CELL_WIDTH
+  end
+
+  y = 0.5
+  until y &gt;= height do
+    `#{context}.moveTo(0, #{y})`
+    `#{context}.lineTo(#{width}, #{y})`
+    y += CELL_HEIGHT
+  end
+
+  `#{context}.strokeStyle = &quot;#eee&quot;`
+  `#{context}.stroke()`
+end
+</pre>
+<h5>Let&#8217;s See the Canvas</h5>
+<p>Finally, getting the grid to draw is just a simple method call away:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+grid = Grid.new
+grid.draw_canvas
+</pre>
+<p>If you are running Guard press &#8216;Enter&#8217;, or you could run <code>rake build</code>. Either way, when you open <code>index.html</code>, you will see a glorious grid.</p>
+<h3>2. Adding Some Interactivity</h3>
+<p>Being able to draw grid lines on a <code>canvas</code> – in Ruby, no less! – is all well and good, but entirely useless if we cannot do anything to it. </p>
+<p>Let&#8217;s spice things up a little. </p>
+<p>One of the things we can to do is fill in a <em>cell</em>. In order to do that, we need to know <em>where</em> we clicked, and then compute the cell&#8217;s position with respect to our grid. That is, we need to figure out the clicked  coordinates based on the grid we drew.</p>
+<p>Even before knowing <em>where</em> we clicked, we need to know <em>when</em> we clicked. In this section, we also look at how <code>opal-jquery</code> lets us use Ruby to interact with jQuery&#8217;s event listeners.</p>
+<h4>Fill and Unfilling a Cell</h4>
+<p>The following methods draw a black square and clears a square of the same dimensions:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+def fill_cell(x, y)
+  x *= CELL_WIDTH;
+  y *= CELL_HEIGHT;
+  `#{context}.fillStyle = &quot;#000&quot;`
+  `#{context}.fillRect(#{x.floor+1}, #{y.floor+1}, #{CELL_WIDTH-1}, #{CELL_HEIGHT-1})`
+end
+
+def unfill_cell(x, y)
+  x *= CELL_WIDTH;
+  y *= CELL_HEIGHT;
+  `#{context}.clearRect(#{x.floor+1}, #{y.floor+1}, #{CELL_WIDTH-1}, #{CELL_HEIGHT-1})`
+end
+</pre>
+<h4>Getting the Position of the Cursor</h4>
+<p>Here&#8217;s an example on translating Javascript into Ruby. I was too lazy and impatient to figure out how to implement this particular function. As it turns out, <a href="http://diveintohtml5.info/">Dive Into HTML 5</a> already has an example in Javascript:</p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+function getCursorPosition(event) {
+  var x;
+  var y;
+  if (event.pageX != undefined &amp;&amp; event.pageY != undefined) {
+    x = event.pageX;
+    y = event.pageY;
+  }
+  else {
+    x = event.clientX + document.body.scrollLeft +
+          document.documentElement.scrollLeft;
+    y = event.clientY + document.body.scrollTop +
+          document.documentElement.scrollTop;
+  }
+}
+</pre>
+<p>Now, let&#8217;s see what the Opal-flavored Ruby looks like:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+def get_cursor_position(event)
+  if (event.page_x &amp;&amp; event.page_y)
+    x = event.page_x;
+    y = event.page_y;
+  else
+    doc = Opal.Document[0]
+    x = event[:clientX] + doc.scrollLeft +
+          doc.documentElement.scrollLeft;
+    y = event[:clientY] + doc.body.scrollTop +
+          doc.documentElement.scrollTop;
+  end
+end
+</pre>
+<p>As you can see, there&#8217;s almost a one to one conversion. </p>
+<p>You might be wondering why are there 2 branches just to find the cursor position. The short answer is different browsers have different ways of implementing this functionality.</p>
+<h3>Discovering Methods</h3>
+<p>How did I know, for example, that the <code>page_x</code> method exists for <code>event</code> or that <code>clientX</code> should be accessed using the hash notation?</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+def get_cursor_position(event)
+  `console.log(#{event})` # &lt;- I cheated.
+  # code omitted
+end
+</pre>
+<p>I <em>did not</em> use <code>puts event</code> or even <code>p event</code>. I picked <code>console.log</code> instead. </p>
+<p>Here&#8217;s why:</p>
+<p><img src="http://imgur.com/39pRKcC.png" width="391" height="701" class="alignnone" /></p>
+<p>Using <code>console.log</code> gives us much more detail, since <code>event</code> is first and foremost, a Javascript object. Using <code>puts</code>, <code>p</code> or even <code>inspect</code> doesn&#8217;t do much.</p>
+<p>In the <code>if</code> branch, we access <code>event</code> using the dot notation, while in the <code>else</code> branch, we treat <code>event</code> like a hash. </p>
+<p>In the green box, <code>event.page_x</code> is a method call because there indeed is a <code>page_x</code> function defined as <code>$page_x: function { ... }</code>.</p>
+<p>In the purple box, <code>clientX</code> is a <em>value</em>. Therefore, it is accessed using the hash notation.</p>
+<p>Here is some additional code to compute the coordinates respect to the grid.</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+def get_cursor_position(event)
+
+  ## Previous code omitted ...
+
+  x -= `#{canvas}.offsetLeft`
+  y -= `#{canvas}.offsetTop`
+
+  x = (x / CELL_WIDTH).floor
+  y = (y / CELL_HEIGHT).floor
+
+  Coordinates.new(x: x, y: y)
+end
+</pre>
+<h4><code>Coordinates</code> and OpenStruct</h4>
+<p>I&#8217;ve snuck in a <code>Coordinates</code> class. Interestingly, Opal has <a href="http://www.ruby-doc.org/stdlib-2.0/libdoc/ostruct/rdoc/OpenStruct.html">OpenStruct</a>, too. </p>
+<p>You can define <code>Coordinates</code> like so: </p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+require 'opal'
+require 'opal-jquery'
+require 'ostruct'     # &lt;- remember to do this!
+
+class Grid
+  # ...
+end
+
+class Coordinates &lt; OpenStruct; end
+</pre>
+<p>Just like the Ruby version, we need to <code>require ostruct</code> in order to use it.</p>
+<h3>Event Listening</h3>
+<p>Finally, we have all the building blocks to listen for events. Both listeners will listen for events on <code>canvas</code>. </p>
+<p>The first event listener triggers on a single click mouse event. Once that happens, the cursor position is computed and the appropriate cell is filled.</p>
+<p>The second event listener triggers on a double click mouse event. Again, the cursor position is computed and the appropriate cell is unfilled.</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+def add_mouse_event_listener
+  Element.find(&quot;##{canvas_id}&quot;).on :click do |event|
+    coords = get_cursor_position(event)
+    x, y   = coords.x, coords.y
+    fill_cell(x, y)
+  end
+
+  Element.find(&quot;##{canvas_id}&quot;).on :dblclick do |event|
+    coords = get_cursor_position(event)
+    x, y   = coords.x, coords.y
+    unfill_cell(x, y)
+  end
+end
+</pre>
+<p>After drawing the canvas, register the mouse listener:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+class Grid
+  # ...
+end
+
+grid = Grid.new
+grid.draw_canvas
+grid.add_mouse_event_listener # &lt;- Add this!
+</pre>
+<p>Once our changes are built, go ahead and open <code>index.html</code>. Try clicking on any grid to mark a cell and double clicking to unmark a cell. </p>
+<p>Here&#8217;s my masterpiece:</p>
+<p><img src="http://imgur.com/ZPEKTPs.png" width="660" height="166" class="alignnone" /></p>
+<h2>The Full Source</h2>
+<p>For reference, here&#8217;s the full source code:</p>
+<pre class="brush: ruby; title: ; notranslate" title="">
+require 'opal'
+require 'opal-jquery'
+require 'ostruct'
+
+class Grid
+  attr_reader :height, :width, :canvas, :context, :max_x, :max_y
+
+  CELL_HEIGHT = 15;
+  CELL_WIDTH  = 15;
+
+  def initialize
+    @height  = `$(window).height()`                   # Numeric!
+    @width   = `$(window).width()`                    # A Numeric too!
+    @canvas  = `document.getElementById(#{canvas_id})`
+    @context = `#{canvas}.getContext('2d')`
+    @max_x   = (height / CELL_HEIGHT).floor           # Defines the max limits
+    @max_y   = (width / CELL_WIDTH).floor             # of the grid
+  end
+
+  def draw_canvas
+    `#{canvas}.width  = #{width}`
+    `#{canvas}.height = #{height}`
+
+    x = 0.5
+    until x &gt;= width do
+      `#{context}.moveTo(#{x}, 0)`
+      `#{context}.lineTo(#{x}, #{height})`
+      x += CELL_WIDTH
+    end
+
+    y = 0.5
+    until y &gt;= height do
+      `#{context}.moveTo(0, #{y})`
+      `#{context}.lineTo(#{width}, #{y})`
+      y += CELL_HEIGHT
+    end
+
+    `#{context}.strokeStyle = &quot;#eee&quot;`
+    `#{context}.stroke()`
+  end
+
+  def get_cursor_position(event)
+    puts event
+    p event
+    `console.log(#{event})`
+    if (event.page_x &amp;&amp; event.page_y)
+      x = event.page_x;
+      y = event.page_y;
+    else
+      doc = Opal.Document[0]
+      x = e[:clientX] + doc.scrollLeft + doc.documentElement.scrollLeft;
+      y = e[:clientY] + doc.body.scrollTop + doc.documentElement.scrollTop;
+    end
+
+    x -= `#{canvas}.offsetLeft`
+    y -= `#{canvas}.offsetTop`
+
+    x = (x / CELL_WIDTH).floor
+    y = (y / CELL_HEIGHT).floor
+
+    Coordinates.new(x: x, y: y)
+  end
+
+  def fill_cell(x, y)
+    x *= CELL_WIDTH;
+    y *= CELL_HEIGHT;
+    `#{context}.fillStyle = &quot;#000&quot;`
+    `#{context}.fillRect(#{x.floor+1}, #{y.floor+1}, #{CELL_WIDTH-1}, #{CELL_HEIGHT-1})`
+  end
+
+  def unfill_cell(x, y)
+    x *= CELL_WIDTH;
+    y *= CELL_HEIGHT;
+    `#{context}.clearRect(#{x.floor+1}, #{y.floor+1}, #{CELL_WIDTH-1}, #{CELL_HEIGHT-1})`
+  end
+
+  def add_mouse_event_listener
+    Element.find(&quot;##{canvas_id}&quot;).on :click do |event|
+      coords = get_cursor_position(event)
+      x, y   = coords.x, coords.y
+      fill_cell(x, y)
+    end
+
+    Element.find(&quot;##{canvas_id}&quot;).on :dblclick do |event|
+      coords = get_cursor_position(event)
+      x, y   = coords.x, coords.y
+      unfill_cell(x, y)
+    end
+  end
+
+  def canvas_id
+    'conwayCanvas'
+  end
+
+end
+
+class Coordinates &lt; OpenStruct; end
+
+grid = Grid.new
+grid.draw_canvas
+grid.add_mouse_event_listener
+</pre>
+<h2>Up Next &#8230;</h2>
+<p>In a future post, we&#8217;ll complete our Conway&#8217;s Game of Life application by implementing the game logic and hooking it to our grid. In doing so, we&#8217;ll also get to see a few more examples of how Opal gracefully blends Ruby and Javascript,</p>
+<p>Thanks for reading!</p>
+
+            <div class="contributor-container--large">
+        <div class="contributor contributor--large">
+        <figure class="contributor_avatar article_author-avatar">
+          <img alt='' src='http://1.gravatar.com/avatar/f3fe8fa67ae6dbc1d19189e80c9e96a2?s=96&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D96&amp;r=G' class='avatar avatar-96 photo' height='96' width='96' />        </figure>
+        <div class="contributor_details">
+          <h2 class="contributor_name"><a href="http://www.sitepoint.com/author/btan/">Benjamin Tan Wei Hao</a></h2>
+
+          <p class="contributor_title">
+                      </p>
+          <p>Benjamin is the Technical Director at Qisahn.com Pte Ltd, a video game retailer based in Singapore. Deathly afraid of being irrelevant, is always trying to catch up on his ever-growing reading list. He <a href="http://benjamintanweihao.github.io">blogs</a>, <a href="https://github.com/benjamintanweihao">codes</a> and <a href="https://twitter.com/bentanweihao">tweets</a>.</p>
+          <ul class="contributor_social">
+            <li><a href="https://twitter.com/bentanweihao" target="_blank"><i class="icon-twitter"></i></a></li><li><a href="https://github.com/benjamintanweihao" target="_blank"><i class="icon-github"></i></a></li><li><a href="https://plus.google.com/+BenjaminTanWeiHao" target="_blank"><i class="icon-google-plus"></i></a></li>          </ul>
+        </div>
+      </div>
+      </div>
+
+      </section>
+
+              <div class="related-content">
+          <h2>Related Articles</h2>
+          <ul class="article-list article-list--related">
+            <li class="article-list_item  tile post-tile" data-offset="0">
+  <article class="article article--micro article--micro--related category-ruby " data-disqus-id="http://www.sitepoint.com/rubys-pathname-api/">
+    <header class="article_category"><h2 class="article_category_title"><a href="http://www.sitepoint.com/ruby/">Ruby</a></h2></header>
+
+    <section class="article_header">
+      <h1 class="article_title"><a href="http://www.sitepoint.com/rubys-pathname-api/">Ruby's Pathname API</a></h1>
+      <div class="contributor article_contributor">
+        <p class="contributor_name article_author-name">by <a href="http://www.sitepoint.com/author/abrasseur/">Arne Brasseur</a></p>
+      </div>
+
+      <div class="article_meta-data"><p class="article_pub-date"><time datetime="2014-02-24 06:30:44" pubdate>Feb 24, 2014</time></p></div>
+      </section>
+  </article>
+</li><li class="article-list_item  tile post-tile" data-offset="0">
+  <article class="article article--micro article--micro--related category-ruby " data-disqus-id="http://www.sitepoint.com/getting-started-ruby/">
+    <header class="article_category"><h2 class="article_category_title"><a href="http://www.sitepoint.com/ruby/">Ruby</a></h2></header>
+
+    <section class="article_header">
+      <h1 class="article_title"><a href="http://www.sitepoint.com/getting-started-ruby/">Getting Started with Ruby</a></h1>
+      <div class="contributor article_contributor">
+        <p class="contributor_name article_author-name">by <a href="http://www.sitepoint.com/author/djones/">Darren Jones</a></p>
+      </div>
+
+      <div class="article_meta-data"><p class="article_pub-date"><time datetime="2013-09-02 06:30:28" pubdate>Sep 02, 2013</time></p></div>
+      </section>
+  </article>
+</li><li class="article-list_item  tile post-tile" data-offset="0">
+  <article class="article article--micro article--micro--related category-ruby " data-disqus-id="http://www.sitepoint.com/detecting-faces-with-ruby-ffi-in-a-nutshell/">
+    <header class="article_category"><h2 class="article_category_title"><a href="http://www.sitepoint.com/ruby/">Ruby</a></h2></header>
+
+    <section class="article_header">
+      <h1 class="article_title"><a href="http://www.sitepoint.com/detecting-faces-with-ruby-ffi-in-a-nutshell/">Detecting Faces with Ruby: FFI in a Nutshell</a></h1>
+      <div class="contributor article_contributor">
+        <p class="contributor_name article_author-name">by <a href="http://www.sitepoint.com/author/mberszick/">Marc Berszick</a></p>
+      </div>
+
+      <div class="article_meta-data"><p class="article_pub-date"><time datetime="2013-04-18 06:30:13" pubdate>Apr 18, 2013</time></p></div>
+      </section>
+  </article>
+</li>        </ul>
+      </div>
+
+      <div class="promo-panel promo-panel--no-ad">
+        <div class="widget maestro maestro-content-type-product " id="maestro-product-35"><div class="promo-panel_media-object"><img src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/03/1396310862SitePoint-Logo-Small.jpg" /></div>
+<div class="promo-panel_content">
+  <h1 class="promo-panel_title">
+    Sign up for the SitePoint newsletter!
+  </h1>
+  <p>Get one email each week with SitePoint's top articles.</p>
+  <form class="promo-panel_action"><input type="email" name="email" class="promo-panel_email" placeholder="email address" /><input type="hidden" name="content" value="35" /><button class="button radius">Go</button></form>
+</div></div>      </div>
+
+
+      <a id="comments"></a>
+
+<div id="disqus_thread">
+                    <div id="dsq-content">
+
+
+            <ul id="dsq-comments">
+                    <li class="comment even thread-even depth-1" id="dsq-comment-107866">
+        <div id="dsq-comment-header-107866" class="dsq-comment-header">
+            <cite id="dsq-cite-107866">
+                <span id="dsq-author-user-107866">benjamintanweihao</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-107866" class="dsq-comment-body">
+            <div id="dsq-comment-message-107866" class="dsq-comment-message"><p>Thank you Julian. Should be fixed real soon.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+            </ul>
+
+
+        </div>
+
+    </div>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    var disqus_url = 'http://www.sitepoint.com/opal-ruby-browser-basics/';
+    var disqus_identifier = '79130 http://www.sitepoint.com/?p=79130';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_shortname = 'sitepointproduction';
+    var disqus_title = "Opal: Ruby in Your Browser, the Basics";
+        var disqus_config = function () {
+        var config = this; // Access to the config object
+        config.language = '';
+
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
+
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+                config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = '?cf_action=sync_comments&post_id=79130';
+
+            var firstScript = document.getElementsByTagName( "script" )[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        });
+                    };
+/* ]]> */
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    var DsqLocal = {
+        'trackbacks': [
+        ],
+        'trackback_url': "http:\/\/www.sitepoint.com\/opal-ruby-browser-basics\/trackback\/"    };
+/* ]]> */
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.' + 'disqus.com' + '/embed.js?pname=wordpress&pver=2.74';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+/* ]]> */
+</script>
+
+    </article>
+
+  <aside class="page_aside article_aside">
+    <div class="widget maestro maestro-content-type-ad hide-for-small" id="maestro-product-1"><!-- SP2013_Articles_300x250_1 -->
+<div id="div-gpt-ad-1392428092543-0" style="width:300px; height:250px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1392428092543-0"); });</script>
+ </div></div><div class="widget maestro maestro-content-type-ad hide-for-small" id="maestro-product-49"><!-- SP2013_Articles_300x600_1 -->
+<div id="div-gpt-ad-1392428092543-4" style="width:300px; height:600px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1392428092543-4"); });</script>
+ </div></div>  </aside>
+
+</main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="row">
+
+        <ul class="footer-links">
+          <li class="foot-link_item">
+            <h3>About</h3>
+          </li>
+          <li class="foot-link_item">
+            <a href="/about-us/">About us</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="/advertising">Advertise</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="/legals">Legals</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="mailto:feedback@sitepoint.com">Feedback</a>
+          </li>
+        </ul>
+
+        <ul class="footer-links">
+          <li class="foot-link_item">
+            <h3>Our Sites</h3>
+          </li>
+          <li class="foot-link_item">
+            <a href="http://www.learnable.com" target="_blank">Learnable</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="http://reference.sitepoint.com" target="_blank">Reference</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="/hosting-reviews/" target="_blank">Hosting Reviews</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="/web-foundations/">Web Foundations</a>
+          </li>
+        </ul>
+
+        <ul class="footer-links">
+          <li class="foot-link_item">
+            <h3>Connect</h3>
+          </li>
+          <li class="foot-link_item foot-link_item--icons">
+            <a href="/feed"><i class="icon-rss icon-blocks icon-blocks--rss"></i></a>
+            <a href="/newsletter"><i class="icon-envelope-alt icon-blocks icon-blocks--newsletter"></i></a>
+            <a href="https://www.facebook.com/sitepoint" target="_blank"><i class="icon-facebook icon-blocks icon-blocks--facebook"></i></a>
+            <a href="http://twitter.com/sitepointdotcom" target="_blank"><i class="icon-twitter icon-blocks icon-blocks--twitter"></i></a>
+            <a href="https://plus.google.com/+sitepoint" target="_blank"><i class="icon-google-plus icon-blocks icon-blocks--google-plus"></i></a>
+          </li>
+        </ul>
+
+        <p class="site-footer_copyright">
+          &copy; 2000 &ndash; 2014 SitePoint Pty. Ltd.
+        </p>
+
+      </div>
+    </footer>
+
+    <div id="search-dropdown">
+      <div data-role="search-for">
+        <a class="search-link" href="#">Search for...</a>
+      </div>
+      <ul data-role="results"></ul>
+    </div>
+
+    				<script type='text/javascript'><!--
+			var seriesdropdown = document.getElementById("orgseries_dropdown");
+			if (seriesdropdown) {
+			 function onSeriesChange() {
+					if ( seriesdropdown.options[seriesdropdown.selectedIndex].value != ( 0 || -1 ) ) {
+						location.href = "http://www.sitepoint.com/series/"+seriesdropdown.options[seriesdropdown.selectedIndex].value;
+					}
+				}
+				seriesdropdown.onchange = onSeriesChange;
+			}
+			--></script>
+			<div class="triggered-cta-box-wrapper-bg"></div>
+<div id="triggered-cta-box-wrapper" class="triggered-cta-box-wrapper triggered-cta-box-wrapper--fullpage">
+  <a href="#close" id="triggered-cta-box-close">x</a><!-- Free ebook: Triggered CTA Box custom style (201403-free-ebook-popup) -->
+<div class="close-link-wrapper">
+  <a href="#" class="triggered-cta-box-close-link">Go to SitePoint.com</a>
+</div>
+<div class="triggered-cta-box campaign-free-ebook">
+  <div class="row campaign-free-ebook__row1">
+    <div class="column large-7 large-offset-1">
+      <p class="logo-wrapper"><img src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/02/1392770725sp-logo-42x50.png" alt="SitePoint logo" /></p>
+      <h1>Free book: Jump Start HTML5 Basics</h1>
+      <p>Grab a free copy of one our latest ebooks! Packed with hints and tips on HTML5&#39;s most powerful new features.</p>
+    </div>
+    <div class="column large-7 end text-center">
+      <img class="books-image" src="//d2sis3lil8ndrq.cloudfront.net/books/jshtml-basics1_medium_3d.png" alt="Jump Start HTML Basics book cover image" />
+    </div>
+  </div>
+  <div class="row campaign-free-ebook__row2">
+    <form>
+      <div>
+        <div class="column large-9 large-offset-1">
+          <input type="email" name="email" id="email" placeholder="Email address">
+        </div>
+        <div class="column large-5 end">
+          <input type="hidden" name="submitted" id="submitted" value="true" />
+          <input type="hidden" name="content" value="29">
+          <button id="triggered-cta-box-submit" class="btn-buy button success">Claim Book</button>
+        </div>
+      </div>
+      <div>
+        <div class="column large-14 large-offset-1">
+          <p id="triggered-cta-box-message"></p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+  window.triggeredCtaBox = {
+    boxSelector: "#triggered-cta-box-wrapper",
+    bgSelector: ".triggered-cta-box-wrapper-bg",
+    closeSelector: "#triggered-cta-box-close",
+    closeLinkSelector: ".triggered-cta-box-close-link",
+    campaign: "201404-free-ebook-popup",
+    boxType: "fullpage",
+    mobileEnabled: false,
+    cookieLife: 14,
+    triggerType: "time",
+    triggerRequiredPages: 2,
+    triggerValue: 4,
+    slideSpeed: 1000,
+    ajaxUrl: "http://www.sitepoint.com/wp-admin/admin-ajax.php"
+  };
+</script >
+<!--Plugin WP Missed Schedule 2013.1231.2013 Active - Tag 6707293c0218e2d8b7aa38d418ffa608-->
+
+<!-- This site is patched which an important unfixed problem since WordPress 2.5+ to 3.9+ -->
+
+
+
+<!-- START Parse.ly Include: Standard -->
+<div id="parsely-root" style="display: none">
+  <div id="parsely-cfg" data-parsely-site="sitepoint.com"></div>
+</div>
+<script>
+(function(s, p, d) {
+  var h=d.location.protocol, i=p+"-"+s,
+      e=d.getElementById(i), r=d.getElementById(p+"-root"),
+      u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+      :"static."+p+".com";
+  if (e) return;
+  e = d.createElement(s); e.id = i; e.async = true;
+  e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+})("script", "parsely", document);
+</script>
+<!-- END Parse.ly Include: Standard -->
+
+<script type='text/javascript' src='http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushBash.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushRuby.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCss.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0.83c'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.defaults['wrap-lines'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='http://www.sitepoint.com/wp-content/themes/sitepoint/assets/javascripts/scripts-foot-10b46f2e49a68a40c929e8444288ff84.js?ver=3.8.1'></script>
+<script>(function($){$(document).ready(function(){ if(typeof DISQUSWIDGETS != "undefined"){DISQUSWIDGETS.loadCount($, "sitepointproduction")} });})(jQuery);</script>
+  </body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using memcached
+Object Caching 857/874 objects using memcached
+Content Delivery Network via Amazon Web Services: CloudFront: dab1nmslvvntp.cloudfront.net
+
+ Served from: www.sitepoint.com @ 2014-04-05 02:13:15 by W3 Total Cache -->
