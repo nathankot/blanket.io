@@ -104,7 +104,8 @@ gulp.task('test', function() {
       .pipe(mocha({
         reporter: 'min',
         bail: true
-      }));
+      }))
+      .on('error', function() {});
 });
 
 gulp.task('watchtests', function() {
