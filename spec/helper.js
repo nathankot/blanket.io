@@ -1,4 +1,7 @@
-var nock = require('nock');
+var nock = require('nock'),
+    _ = require('lodash'),
+    Q = require('q'),
+    Source = require('../models/source.js');
 
 exports.setupHNNocks = function() {
   nock('http://news.ycombinator.com')
@@ -32,4 +35,24 @@ exports.fakeResponse = function(cb) {
       if (typeof cb === 'function') { cb.apply(this, arguments); }
     }
   };
+};
+
+/**
+ * @returns Promise
+ */
+exports.fakeSources = function() {
+  exports.setupHNNocks();
+
+  return Q.ninvoke(Source.collection, 'remove')
+    .then(function() {
+      return Q.all([
+        Q.ninvoke(new Source({ url: 'http://news.ycombinator.com' }), 'save'),
+        Q.ninvoke(new Source({ url: 'https://news.ycombinator.com/rss' }), 'save')
+      ]);
+    })
+    .then(function(sources) {
+      return _.map(sources, function(a) {
+        return _.first(a);
+      });
+    });
 };
