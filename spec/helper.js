@@ -25,3 +25,11 @@ exports.setupHNNocks = function() {
     .get('/blog/tesla-model-s-ethernet-network-explored-possible-jailbreak-in-the-future')
     .replyWithFile(200, __dirname + '/fixtures/hn/tesla.html');
 };
+
+exports.fakeResponse = function(cb) {
+  return {
+    send: function() {
+      if (typeof cb === 'function') { cb.apply(this, arguments); }
+    }
+  };
+};
