@@ -13,7 +13,9 @@
     "axis-css": "^0.1.8",
     "mongoose": "^3.8.8",
     "lodash": "^2.4.1",
-    "nifty-mongoose-types": "0.0.1"
+    "nifty-mongoose-types": "0.0.1",
+    "request": "^2.34.0",
+    "cheerio": "^0.14.0"
   },
   "main": "app.js",
   "author": "Nathan Kot <me@nathankot.com> (http://nathankot.com/)",
@@ -39,6 +41,7 @@
     "chai": "^1.9.1",
     "gulp-nodemon": "^1.0.2",
     "gulp-livereload": "^1.2.0",
-    "gulp-mocha": "^0.4.1"
+    "gulp-mocha": "^0.4.1",
+    "nock": "^0.27.3"
   }
 }
