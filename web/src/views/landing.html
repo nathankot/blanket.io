@@ -1,1 +1,80 @@
-test
+
+<hgroup>
+  <h2>Stop compulsively checking the news.</h2>
+  <h2>Let your news come to you.</h2>
+</hgroup>
+
+<h3>Where do you usually get your news?</h3>
+
+<div ng-if="user.sources.length == 0" class="add sources" ng-controller="Sources">
+  <form 
+    name="form.source"
+    class="new source"
+    ng-submit="add(source)"
+    >
+
+    <div 
+      class="errors" 
+      ng-show="form.source.$invalid && form.source.$dirty"
+      >
+      <ul>
+        <li ng-show="form.source.url.$error.required">
+          Please enter a website.
+        </li>
+
+        <li ng-show="form.source.url.$error.url">
+          Please enter a valid URL.
+        </li>
+
+        <li ng-show="form.source.url.$error.unique">
+          This site already exists.
+        </li>
+      </ul>
+    </div>
+
+    <input 
+      type="url"
+      ng-model="source.url"
+      name="url"
+      placeholder="http://cnn.com"
+      required
+    >
+
+    <a href class="button" ng-click="add(source)">Add</a>
+  </form>
+
+  <div class="source list">
+    <ul ng-repeat="source in sources">
+      <li>{{ source.url }}</li>
+    </ul>
+  </div>
+
+  <div class="next" ng-if="sources.length > 0">
+    <div 
+      class="next button"
+      ng-click="save(sources)"
+    >Next</div>
+  </div>
+</div>
+
+<div 
+  ng-if="user.sources.length > 0 && !user.email" 
+  class="set email"
+  ng-controller="subscribe"
+  >
+  <h3>Sweet! Where do you want your news to go?</h3>
+
+  <div class="field">
+    <label>Email</label>
+    <input type="email" name="">
+  </div>
+
+  <div class="field">
+    <label>Send me news every</label>
+    <select>
+      <option value="">Day</option>
+      <option value="">Week</option>
+      <option value="">Month</option>
+    </select>
+  </div>
+</div>
