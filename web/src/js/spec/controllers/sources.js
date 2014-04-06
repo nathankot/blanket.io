@@ -3,7 +3,7 @@
 require('angular-mocks');
 var expect = require('chai').expect;
 
-describe.only('Controller: Sources', function() {
+describe('Controller: Sources', function() {
 
   var SourcesController,
       scope,
