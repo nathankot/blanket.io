@@ -38,7 +38,7 @@ gulp.task('testScripts', function() {
 });
 
 gulp.task('styles', function() {
-  gulp.src('web/src/styl/*.styl')
+  gulp.src('web/src/styl/app.styl')
       .pipe(stylus({
         paths: ['web/components/'],
         use: ['nib', 'axis-css'],
