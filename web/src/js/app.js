@@ -20,6 +20,11 @@ var app = angular.module('rssApp', [
     url: '/',
     templateUrl: 'views/landing.html'
   });
+}).run(function($rootScope) {
+  $rootScope.user = {
+    email: null,
+    sources: []
+  };
 });
 
 // Controllers
