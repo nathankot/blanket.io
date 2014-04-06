@@ -7,12 +7,18 @@ angular.module('rssApp')
       $scope.sources = [];
 
       $scope.add = function(source) {
-        $scope.form.source.$setPristine(false);
+        $scope.form.source.$setDirty();
+
+        if (_.find($scope.sources, function(s) { return s.url == source.url; })) {
+          $scope.form.source.url.$setValidity('unique', false);
+        } else {
+          $scope.form.source.url.$setValidity('unique', true);
+        }
 
         if ($scope.form.source.$valid) {
-          $scope.form.source.$setPristine(true);
           $scope.sources.push(source);
           $scope.source = {};
+          $scope.form.source.$setPristine();
         }
       };
 
