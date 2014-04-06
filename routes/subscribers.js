@@ -16,6 +16,8 @@ exports.create = function(req, res, next) {
     }), 
     'save'
   ).spread(function(subscriber) {
+    return Q.ninvoke(subscriber, 'populate', 'sources');
+  }).then(function(subscriber) {
     res.send(201, subscriber.toJSON());
   })
   .fail(function(err) { next(err); });

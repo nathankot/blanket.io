@@ -56,4 +56,15 @@ describe('Route: subscribers', function() {
       console.log(err);
     });
   });
+
+  it('should populate user sources', function(done) {
+    cb = function(code, user) {
+      expect(user.sources[0].url).not.to.be.undefined;
+      done();
+    };
+
+    subscribers.create(req, res, function(err) {
+      console.log(err);
+    });
+  });
 });
