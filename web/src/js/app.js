@@ -15,7 +15,7 @@ var app = angular.module('rssApp', [
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/');
   RestangularProvider.setRestangularFields({ id: '_id' });
-
+  RestangularProvider.setBaseUrl('/api/v1');
   $stateProvider.state('home', {
     url: '/',
     templateUrl: 'views/landing.html'
