@@ -11,7 +11,7 @@ var Source = require('../models/source.js'),
 exports.create = function(req, res, next) {
   var isMultiple = false;
 
-  Q.fcall(function() {
+  Q.fcall(function normalizeRequest() {
     if (_.isArray(req.body)) {
       isMultiple = true;
       return _.map(req.body, function(raw) {
@@ -21,12 +21,12 @@ exports.create = function(req, res, next) {
       return [new Source({ url: req.body.url })];
     }
   })
-  .then(function(sources) {
+  .then(function createSources(sources) {
     return Q.allSettled(_.map(sources, function(source) {
       return Q.ninvoke(source, 'save');
     }));
   })
-  .then(function(results) {
+  .then(function filterSources(results) {
     return Q.all(
       _(results).filter(function(result) {
         if (result.state === 'fulfilled') { return true; }
@@ -41,7 +41,7 @@ exports.create = function(req, res, next) {
       }).value()
     );
   })
-  .then(function(sources) {
+  .then(function respond(sources) {
     if (sources.length <= 0) {
       throw new HttpError('No reachable sources found', 422);
     }
