@@ -4,7 +4,7 @@ require('../../db.js');
 var Item = require('../../models/item.js'),
     expect = require('chai').expect;
 
-describe.only('Model: Item', function() {
+describe('Model: Item', function() {
 
   var item;
 
