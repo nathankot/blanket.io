@@ -1,7 +1,8 @@
 'use strict';
 
 var _ = require('lodash'),
-    cluster = require('cluster');
+    cluster = require('cluster'),
+    errorHandler = require('./lib/errorHandler.js');
 
 if (cluster.isMaster) {
   var cpuCount = require('os').cpus().length,
@@ -48,6 +49,7 @@ if (cluster.isMaster) {
     app.use(express.errorHandler());
     app.use(express.static(path.join(__dirname, 'web', 'dev')));
   } else {
+    app.use(errorHandler());
     app.use(express.static(path.join(__dirname, 'web', 'dist')));
   }
 
