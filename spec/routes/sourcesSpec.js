@@ -54,6 +54,25 @@ describe('Route: sources', function() {
         sources.create(req, res, next);
       });
 
+      describe('multi create with existing source', function() {
+
+        it('should still react with the same sources', function(done) {
+          cb = function(code, firstSources) {
+            helper.setupHNNocks();
+            nock('http://nzherald.co.nz').get('/').reply(404);
+            cb = function(code, sources) {
+              expect(_.first(firstSources)._id.toString())
+              .to.equal(_.first(sources)._id.toString());
+              expect(sources.length).to.equal(2);
+              done();
+            };
+            sources.create(req, res, next);
+          };
+          sources.create(req, res, next);
+        });
+        
+      });
+
     });
 
     describe('single create', function() {

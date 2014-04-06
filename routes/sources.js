@@ -4,7 +4,6 @@ var Source = require('../models/source.js'),
     HttpError = require('../lib/httpError.js'),
     _ = require('lodash'),
     Q = require('q');
-  
 
 /**
  * Create one, or multiple sources.
@@ -28,11 +27,19 @@ exports.create = function(req, res, next) {
     }));
   })
   .then(function(results) {
-    return _(results).filter(function(result) {
-      return result.state === 'fulfilled';
-    }).map(function(result) {
-      return _.first(result.value);
-    }).value();
+    return Q.all(
+      _(results).filter(function(result) {
+        if (result.state === 'fulfilled') { return true; }
+        else if (result.reason.existing) { return true; }
+        else { return false; }
+      }).map(function(result) {
+        if (result.state === 'fulfilled') {
+          return _.first(result.value);
+        } else {
+          return result.reason.existing;
+        }
+      }).value()
+    );
   })
   .then(function(sources) {
     if (sources.length <= 0) {

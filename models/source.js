@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose'),
     request = require('request'),
     normalizeUrl = require('../lib/normalizeUrl.js'),
@@ -21,25 +23,31 @@ module.exports = mongoose.model('Source', (function() {
   });
 
   schema.pre('validate', function(next) {
-    if (this.isNew) { 
+    if (this.isNew) {
       this.normalize()
       .then(next)
       .fail(function(err) { next(err); });
     } else { next(); }
   });
 
-  /**
-   * Check that the source is unique.
-   */
-  schema.path('url').validate(function(url, respond) {
-    Q.ninvoke(mongoose.model('Source'), 'find', { url: url })
-    .then(function(sources) { return respond(sources.length === 0); })
-    .done();
-  }, 'Source url is not unique.');
+  schema.pre('validate', function(next) {
+    Q.ninvoke(mongoose.model('Source'), 'find', { url: this.url })
+    .then(function(sources) { 
+      if (sources.length === 0) {
+        next();
+      } else {
+        throw new SourceNotUniqueError(
+          'Source already exists',
+          _.first(sources)
+        );
+      }
+    })
+    .fail(function(err) { next(err); });
+  });
 
   /**
    * Normalizes the source url, stores the title if one is found.
-   * 
+   *
    * @throws SourceNotAccessibleError
    */
   schema.methods.normalize = function() {
@@ -74,7 +82,7 @@ module.exports = mongoose.model('Source', (function() {
           '--format=json',
           '--verbose=true',
           '--summary-ratio=' + config.RSSLY_SUMMARY_RATIO
-        ].join(' '), 
+        ].join(' '),
         function(err, stdout, stderr) {
           if (err) { return deferred.reject(err); }
           deferred.resolve(_.map(JSON.parse(stdout), function(raw) {
