@@ -102,10 +102,7 @@ gulp.task('server', function() {
 gulp.task('test', function() {
   process.env.NODE_ENV = 'testing';
   gulp.src('spec/**/*Spec.js')
-      .pipe(mocha({
-        reporter: 'dot',
-        bail: true
-      }))
+      .pipe(mocha({ reporter: 'dot', bail: false }))
       .on('error', function() {});
 });
 
