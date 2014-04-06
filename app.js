@@ -31,6 +31,7 @@ if (cluster.isMaster) {
   });
 } else {
   require('./db.js');
+  require('express-namespace');
 
   var express = require('express');
   var http = require('http');
@@ -52,6 +53,18 @@ if (cluster.isMaster) {
     app.use(errorHandler());
     app.use(express.static(path.join(__dirname, 'web', 'dist')));
   }
+
+  (function setupRouting() {
+
+    var sources = require('./routes/sources.js');
+
+    app.namespace('/api', function() {
+      app.namespace('/v1', function() {
+        app.post('/sources', sources.create);
+      });
+    });
+  
+  })();
 
   http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

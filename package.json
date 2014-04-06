@@ -15,7 +15,8 @@
     "lodash": "^2.4.1",
     "nifty-mongoose-types": "0.0.1",
     "request": "^2.34.0",
-    "cheerio": "^0.14.0"
+    "cheerio": "^0.14.0",
+    "express-namespace": "^0.1.1"
   },
   "main": "app.js",
   "author": "Nathan Kot <me@nathankot.com> (http://nathankot.com/)",
