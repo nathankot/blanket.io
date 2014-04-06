@@ -11,7 +11,7 @@ var helper = require('../helper.js'),
     _ = require('lodash'),
     Q = require('q');
 
-describe.only('Model: Subscriber', function() {
+describe('Model: Subscriber', function() {
   
   var subscriber, sources;
 
