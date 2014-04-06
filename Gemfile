@@ -2,4 +2,4 @@
 source "https://rubygems.org"
 
 # gem "rails"
-gem "rssly"
+gem "rssly", '~> 0.0.6'
