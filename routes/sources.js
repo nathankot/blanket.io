@@ -47,11 +47,11 @@ exports.create = function(req, res, next) {
     }
 
     if (isMultiple) {
-      res.send(200, _.map(sources, function(source) {
+      res.send(201, _.map(sources, function(source) {
         return source.toJSON();
       }));
     } else {
-      res.send(200, _.first(sources).toJSON());
+      res.send(201, _.first(sources).toJSON());
     }
   })
   .fail(function(err) { next(err); });
