@@ -7,8 +7,7 @@ angular.module('rssApp')
 
       $scope.submit = function(subscriber) {
         $scope.form.subscriber.$setDirty();
-
-        if ($scope.form.$valid) {
+        if ($scope.form.subscriber.$valid) {
           $scope.save(subscriber)
           .then(function(subscriber) {
             $scope.user = subscriber;

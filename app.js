@@ -56,11 +56,13 @@ if (cluster.isMaster) {
 
   (function setupRouting() {
 
-    var sources = require('./routes/sources.js');
+    var sources = require('./routes/sources.js'),
+        subscribers = require('./routes/subscribers.js');
 
     app.namespace('/api', function() {
       app.namespace('/v1', function() {
         app.post('/sources', sources.create);
+        app.post('/subscribers', subscribers.create);
       });
     });
   

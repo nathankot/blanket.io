@@ -30,3 +30,4 @@ var app = angular.module('rssApp', [
 // Controllers
 require('./controllers/landing.js');
 require('./controllers/sources.js');
+require('./controllers/subscribe.js');
