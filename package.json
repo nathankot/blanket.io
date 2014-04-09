@@ -17,7 +17,9 @@
     "request": "^2.34.0",
     "cheerio": "^0.14.0",
     "express-namespace": "^0.1.1",
-    "moment": "^2.5.1"
+    "moment": "^2.5.1",
+    "agenda": "^0.6.3",
+    "nodemailer": "^0.6.1"
   },
   "main": "app.js",
   "author": "Nathan Kot <me@nathankot.com> (http://nathankot.com/)",

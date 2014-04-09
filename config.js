@@ -10,7 +10,10 @@ var config = {
   })(),
 
   RSSLY_EXECUTABLE: 'bundle exec rssly',
-  RSSLY_SUMMARY_RATIO: '15'
+  RSSLY_SUMMARY_RATIO: '15',
+
+  NODEMAILER_TRANSPORT: 'SMTP',
+  NODEMAILER_TRANSPORT_OPTIONS: {}
 };
 
 module.exports = config;
