@@ -26,7 +26,7 @@ GEM
     rfeedfinder (0.9.13)
       hpricot (>= 0.6)
       htmlentities (>= 4.0.0)
-    rssly (0.0.7)
+    rssly (0.0.8)
       addressable (~> 2.3)
       bloomfilter-rb (~> 2.1)
       feedbag (~> 0.9)
