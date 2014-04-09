@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 module.exports = mongoose.model('Item', (function() {
 
   var schema = mongoose.Schema({
-    _source: mongoose.Schema.Types.ObjectId,
+    _source: { type: mongoose.Schema.Types.ObjectId, ref: 'Source' },
     url: { type: mongoose.SchemaTypes.Url, unique: true, required: true },
     title: String,
     summary: String,
