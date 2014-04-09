@@ -18,7 +18,9 @@ module.exports = mongoose.model('Item', (function() {
   });
 
   schema.pre('validate', function(done) {
-    this.url = normalizeUrl(this.url);
+    if (this.isNew) {
+      this.url = normalizeUrl(this.url);
+    }
     done();
   });
 
