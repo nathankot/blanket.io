@@ -1,7 +1,10 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    normalizeUrl = require('../lib/normalizeUrl.js');
+    normalizeUrl = require('../lib/normalizeUrl.js'),
+    ItemNotUniqueError = require('./item/itemNotUniqueError.js'),
+    Q = require('q'),
+    _ = require('lodash');
 
 module.exports = mongoose.model('Item', (function() {
 
@@ -22,6 +25,21 @@ module.exports = mongoose.model('Item', (function() {
       this.url = normalizeUrl(this.url);
     }
     done();
+  });
+
+  schema.pre('validate', function(done) {
+    Q.ninvoke(mongoose.model('Item'), 'find', { url: this.url })
+    .then(function(items) {
+      if (items.length === 0) {
+        done();
+      } else {
+        throw new ItemNotUniqueError(
+          'Item already exists',
+          _.first(items)
+        );
+      }
+    })
+    .fail(function(err) { done(err); });
   });
 
   return schema;
