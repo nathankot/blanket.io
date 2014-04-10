@@ -28,6 +28,8 @@ module.exports = mongoose.model('Item', (function() {
   });
 
   schema.pre('validate', function(done) {
+    if (!this.isNew) { return done(); }
+
     Q.ninvoke(mongoose.model('Item'), 'find', { url: this.url })
     .then(function(items) {
       if (items.length === 0) {

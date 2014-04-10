@@ -19,18 +19,21 @@ module.exports = mongoose.model('Source', (function() {
     title: String,
     type: String,
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now }
+    lastFetchedAt: { type: Date, default: null },
+    fetchFrequency: { type: String, default: '1 day' }
   });
 
   schema.pre('validate', function(next) {
-    if (this.isNew) {
-      this.normalize()
-      .then(next)
-      .fail(function(err) { next(err); });
-    } else { next(); }
+    if (!this.isNew) { return next(); }
+
+    this.normalize()
+    .then(next)
+    .fail(function(err) { next(err); });
   });
 
   schema.pre('validate', function(next) {
+    if (!this.isNew) { return next(); }
+
     Q.ninvoke(mongoose.model('Source'), 'find', { url: this.url })
     .then(function(sources) { 
       if (sources.length === 0) {
