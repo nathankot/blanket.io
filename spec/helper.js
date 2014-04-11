@@ -1,7 +1,8 @@
 var nock = require('nock'),
     _ = require('lodash'),
     Q = require('q'),
-    Source = require('../models/source.js');
+    Source = require('../models/source.js'),
+    Item = require('../models/item.js');
 
 exports.setupHNNocks = function() {
   nock('http://news.ycombinator.com')
@@ -55,4 +56,26 @@ exports.fakeSources = function() {
         return _.first(a);
       });
     });
+};
+
+/**
+ * @returns Promise
+ */
+exports.fakeItems = function(source) {
+  return Q.fcall(function() {
+    return [
+      new Item({ 
+        url: 'http://www.sitepoint.com/opal-ruby-browser-basics/',
+        _source: source
+      }),
+      new Item({
+        url: 'http://chrismorgan.info/blog/say-no-to-import-side-effects-in-python.html',
+        _source: source
+      }),
+      new Item({
+        url: 'http://www.dragtimes.com/blog/tesla-model-s-ethernet-network-explored-possible-jailbreak-in-the-future',
+        _source: source
+      })
+    ];
+  });
 };
