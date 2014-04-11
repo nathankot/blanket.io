@@ -10,7 +10,8 @@ var mongoose = require('mongoose'),
     cheerio = require('cheerio'),
     exec = require('child_process').exec,
     config = require('../config.js'),
-    Item = require('./item.js');
+    Item = require('./item.js'),
+    sugar = require('sugar');
 
 module.exports = mongoose.model('Source', (function() {
 
@@ -76,8 +77,53 @@ module.exports = mongoose.model('Source', (function() {
     return deferred.promise;
   };
 
-  schema.methods.fetch = function() {
-    var deferred = Q.defer(),
+  /**
+   * Returns the last # of items since a given time for this source.  It will
+   * scrape for them if the source is out of date (determined by lastFetchedAt
+   * and fetchFrequency.)
+   */
+  schema.methods.fetch = function(since) {
+    since = since || Date.create('1 week ago');
+
+    var source = this,
+        deadline = (function() {
+          if (!source.lastFetchedAt) { return Date.now(); }
+          else { return source.lastFetchedAt.advance(source.fetchFrequency); }
+        })(),
+        isPastDeadline = Date.now() >= deadline;
+
+    return Q.fcall(function() {
+      if (isPastDeadline) { return source.scrape(); }
+      else { return []; }
+    })
+    .then(function(newItems) {
+      return Q.allSettled(
+        _.map(newItems, function(item) {
+          return Q.ninvoke(item, 'save')
+            .fail(function(err) {
+              if (err.name === 'ItemNotUniqueError') { return err.existing; }
+              else { throw err; }
+            });
+        })
+      );
+    })
+    .then(function() {
+      if (isPastDeadline) {
+        source.lastFetchedAt = Date.now();
+        return Q.ninvoke(source, 'save');
+      } else { return true; }
+    })
+    .then(function() {
+      return Q.ninvoke(Item, 'find', { 
+        _source: source._id,
+        createdAt: { $gt: since }
+      });
+    });
+  };
+
+  schema.methods.scrape = function() {
+    var source = this,
+        deferred = Q.defer(),
         child = exec([
           config.RSSLY_EXECUTABLE,
           'fetch',
@@ -90,6 +136,7 @@ module.exports = mongoose.model('Source', (function() {
           if (err) { return deferred.reject(err); }
           deferred.resolve(_.map(JSON.parse(stdout), function(raw) {
             return new Item({
+              _source: source,
               url: raw.url,
               title: raw.title,
               summary: raw.summary,
