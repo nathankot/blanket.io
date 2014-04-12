@@ -1,7 +1,9 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    moment = require('moment');
+    sugar = require('sugar'),
+    Q = require('q'),
+    _ = require('lodash');
 
 module.exports = mongoose.model('Subscriber', (function() {
 
@@ -16,7 +18,7 @@ module.exports = mongoose.model('Subscriber', (function() {
 
   // Give users 3 months activation
   schema.pre('validate', function(next) {
-    this.activeUntil = moment().add('months', 3).toDate();
+    this.activeUntil = Date.create('3 months from now');
     next();
   });
 
@@ -25,6 +27,34 @@ module.exports = mongoose.model('Subscriber', (function() {
       delete ret.activeUntil;
       return ret;
     }
+  };
+
+  /**
+   * @return Promise for an array of items
+   */
+  schema.methods.getDigest = function() {
+    var subscriber = this;
+
+    return Q.ninvoke(this, 'populate', 'sources')
+    .then(function (subscriber) {
+      return Q.allSettled(
+        _.map(subscriber.sources, function(source) {
+          return source.fetch(subscriber.lastDeliveryAt);
+        })
+      );
+    })
+    .then(function(results) {
+      var items = [];
+      _(results).select(function(result) {
+        return result.state === 'fulfilled';
+      }).map(function(result) {
+        return result.value;
+      }).each(function(fetchedItems) {
+        items = items.concat(fetchedItems);
+      });
+
+      return items;
+    });
   };
 
   return schema;

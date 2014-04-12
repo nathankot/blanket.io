@@ -66,15 +66,15 @@ exports.fakeItems = function(source) {
     return [
       new Item({ 
         url: 'http://www.sitepoint.com/opal-ruby-browser-basics/',
-        sources: [source]
+        sources: source ? [source] : []
       }),
       new Item({
         url: 'http://chrismorgan.info/blog/say-no-to-import-side-effects-in-python.html',
-        sources: [source]
+        sources: source ? [source] : []
       }),
       new Item({
         url: 'http://www.dragtimes.com/blog/tesla-model-s-ethernet-network-explored-possible-jailbreak-in-the-future',
-        sources: [source]
+        sources: source ? [source] : []
       })
     ];
   });
