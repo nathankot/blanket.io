@@ -3,7 +3,9 @@
 var mongoose = require('mongoose'),
     sugar = require('sugar'),
     Q = require('q'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    template = require('../lib/template.js'),
+    transport = require('../lib/mailer.js');
 
 module.exports = mongoose.model('Subscriber', (function() {
 

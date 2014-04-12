@@ -65,6 +65,26 @@ if (cluster.isMaster) {
         app.post('/subscribers', subscribers.create);
       });
     });
+
+    // Setup email previewing route
+    if ('development' == app.get('env')) {
+      var helper = require('./spec/helper.js'),
+          template = require('./lib/template.js');
+      app.get('/dev/email/:type?', function(req, res, next) {
+        helper.fakeItems()
+        .then(function(items) {
+          return template('digestv1', { items: items });
+        })
+        .then(function(meta) {
+          res.send(200, (function() {
+            if (req.params.type && req.params.type === 'text') { 
+              return meta.text; 
+            } else { return meta.html; }
+          })());
+        })
+        .done();
+      });
+    }
   
   })();
 
