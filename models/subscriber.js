@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose'),
     sugar = require('sugar'),
+    config = require('../config.js'),
     Q = require('q'),
     _ = require('lodash'),
     template = require('../lib/template.js'),
@@ -56,6 +57,28 @@ module.exports = mongoose.model('Subscriber', (function() {
       });
 
       return items;
+    });
+  };
+
+  schema.methods.sendDigest = function() {
+    var subscriber = this;
+    return subscriber.getDigest()
+    .then(function(items) {
+      return template('digestv1', { items: items });
+    })
+    .then(function(email) {
+      return Q.ninvoke(transport, 'sendMail', {
+        from: config.EMAIL_FROM,
+        to: subscriber.email,
+        subject: config.EMAIL_DIGEST_SUBJECT,
+        text: email.text,
+        html: email.html
+      });
+    })
+    .then(function(response) {
+      subscriber.lastDeliveryAt = Date.now();
+      subscriber.save();
+      return response;
     });
   };
 

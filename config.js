@@ -13,7 +13,10 @@ var config = {
   RSSLY_SUMMARY_RATIO: '15',
 
   NODEMAILER_TRANSPORT: 'SMTP',
-  NODEMAILER_TRANSPORT_OPTIONS: {}
+  NODEMAILER_TRANSPORT_OPTIONS: {},
+
+  EMAIL_FROM: 'digest@blanket.io',
+  EMAIL_DIGEST_SUBJECT: 'Your blanket.io digest'
 };
 
 module.exports = config;
