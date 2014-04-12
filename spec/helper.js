@@ -2,7 +2,8 @@ var nock = require('nock'),
     _ = require('lodash'),
     Q = require('q'),
     Source = require('../models/source.js'),
-    Item = require('../models/item.js');
+    Item = require('../models/item.js'),
+    Faker = require('Faker');
 
 exports.setupHNNocks = function() {
   nock('http://news.ycombinator.com')
@@ -66,15 +67,21 @@ exports.fakeItems = function(source) {
     return [
       new Item({ 
         url: 'http://www.sitepoint.com/opal-ruby-browser-basics/',
-        sources: source ? [source] : []
+        sources: source ? [source] : [],
+        title: Faker.Lorem.sentence(),
+        summary: Faker.Lorem.paragraph()
       }),
       new Item({
         url: 'http://chrismorgan.info/blog/say-no-to-import-side-effects-in-python.html',
-        sources: source ? [source] : []
+        sources: source ? [source] : [],
+        title: Faker.Lorem.sentence(),
+        summary: Faker.Lorem.paragraph()
       }),
       new Item({
         url: 'http://www.dragtimes.com/blog/tesla-model-s-ethernet-network-explored-possible-jailbreak-in-the-future',
-        sources: source ? [source] : []
+        sources: source ? [source] : [],
+        title: Faker.Lorem.sentence(),
+        summary: Faker.Lorem.paragraph()
       })
     ];
   });
