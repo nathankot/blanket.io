@@ -16,7 +16,6 @@ agenda.define('digest', function(job, done) {
 
   Q.ninvoke(query, 'exec')
   .then(function(subs) {
-    console.log(subs);
     return Q.allSettled(
       _.map(subs, function(s) {
         var next = Date.create(s.lastDeliveryAt).advance(s.deliveryFrequency);
