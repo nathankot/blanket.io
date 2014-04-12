@@ -48,8 +48,8 @@ describe('Model: Source', function() {
       expect(source.lastFetchedAt).to.equal(null);
     });
 
-    it('assigns an fetch frequency and defaults to 1 day', function() {
-      expect(source.fetchFrequency).to.equal('1 day');
+    it('assigns an fetch frequency and defaults to 6 hours', function() {
+      expect(source.fetchFrequency).to.equal('6 hours');
     });
 
     describe('duplicate source', function() {
