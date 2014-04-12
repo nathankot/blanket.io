@@ -9,7 +9,9 @@ agenda.define('digest', function(job, done) {
   console.info('Sending digests...');
 
   var minDeliveredAt = Date.create().rewind(config.DIGESTER_INTERVAL),
-        query = Subscriber.find().or([
+        query = Subscriber.find()
+        .where({ activeUntil: { $gt: Date.now() } })
+        .or([
           { lastDeliveryAt: { $lt: minDeliveredAt } },
           { lastDeliveryAt: null }
         ]);
@@ -19,7 +21,7 @@ agenda.define('digest', function(job, done) {
     return Q.allSettled(
       _.map(subs, function(s) {
         var next = Date.create(s.lastDeliveryAt).advance(s.deliveryFrequency);
-        if (next <= Date.create()) {
+        if (!s.lastDeliveryAt || next <= Date.create()) {
           console.info('Sending digest to: ' + s.email);
           return s.sendDigest();
         } else {
