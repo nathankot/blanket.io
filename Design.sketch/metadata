@@ -19,10 +19,11 @@
 		<string>ProximaNova-Regular</string>
 		<string>ProximaNova-Light</string>
 		<string>ProximaNova-Light</string>
+		<string>ProximaNova-Light</string>
 		<string>AvenirNext-Regular</string>
 	</array>
 	<key>length</key>
-	<integer>46303</integer>
+	<integer>46860</integer>
 	<key>version</key>
 	<integer>18</integer>
 </dict>
