@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>{{ subject }}</title>
+        <title>Your Blanket Digest</title>
     </head>
     <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
       <center>
@@ -44,29 +44,17 @@
                             </tr>
                           <tr>
                               <td align="center" valign="top">
-                                  <!-- BEGIN BODY // -->
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
-                                        <tr>
+                                        {{#each items}}
+                                        <tr class="item">
                                             <td valign="top" class="bodyContent" mc:edit="body_content00">
-                                                <h1>Designing Your Template</h1>
-                                                <h3>Creating a good-looking email is simple</h3>
-                                                Customize your template by clicking on the style editor tabs up above. Set your fonts, colors, and styles. After setting your styling is all done you can click here in this area, delete the text, and start adding your own awesome content.
+                                                <h1 class="title">{{title}}</h1>
+                                                <h3 class="url">{{url}}</h3>
+                                                <p class="summary">{{summary}}</p>
                                             </td>
                                         </tr>
-                                      <tr>
-                                          <td class="bodyContent" style="padding-top:0; padding-bottom:0;">
-                                              <img src="http://gallery.mailchimp.com/27aac8a65e64c994c4416d6b8/images/body_placeholder_650px.png" style="max-width:560px;" id="bodyImage" mc:label="body_image" mc:edit="body_image" mc:allowtext />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="top" class="bodyContent" mc:edit="body_content01">
-                                                <h2>Styling Your Content</h2>
-                                                <h4>Make your email easy to read</h4>
-                                                After you enter your content, highlight the text you want to style and select the options you set in the style editor in the "<em>styles</em>" drop down box. Want to <a href="http://www.mailchimp.com/kb/article/im-using-the-style-designer-and-i-cant-get-my-formatting-to-change" target="_blank">get rid of styling on a bit of text</a>, but having trouble doing it? Just use the "<em>remove formatting</em>" button to strip the text of any formatting and reset your style. 
-                                            </td>
-                                        </tr>
+                                        {{/each}}
                                     </table>
-                                    <!-- // END BODY -->
                                 </td>
                             </tr>
                           <tr>
