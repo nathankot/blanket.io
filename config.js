@@ -13,10 +13,18 @@ var config = {
   RSSLY_SUMMARY_RATIO: '15',
 
   NODEMAILER_TRANSPORT: 'SMTP',
-  NODEMAILER_TRANSPORT_OPTIONS: {},
+  NODEMAILER_TRANSPORT_OPTIONS: {
+    host: 'localhost',
+    port: '1025'
+  },
 
   EMAIL_FROM: 'digest@blanket.io',
-  EMAIL_DIGEST_SUBJECT: 'Your blanket.io digest'
+  EMAIL_DIGEST_SUBJECT: 'Your blanket.io digest',
+
+  DIGESTER_INTERVAL: (function() {
+    if (process.env.NODE_ENV === 'development') { return '1 minute'; }
+    else { return '1 day'; }
+  })()
 };
 
 module.exports = config;
