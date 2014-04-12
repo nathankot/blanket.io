@@ -21,7 +21,7 @@ module.exports = mongoose.model('Source', (function() {
     type: String,
     createdAt: { type: Date, default: Date.now },
     lastFetchedAt: { type: Date, default: null },
-    fetchFrequency: { type: String, default: '1 day' }
+    fetchFrequency: { type: String, default: '6 hours' }
   });
 
   schema.pre('validate', function(next) {
