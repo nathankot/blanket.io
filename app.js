@@ -94,7 +94,13 @@ if (cluster.isMaster) {
 
   process.on('message', function(message) {
     if (message === 'start job worker') {
-      console.info('Job work should be starting ...');
+      console.info('Starting job worker...');
+
+      var agenda = require('./lib/agenda.js'),
+          digestJob = require('./jobs/digest.js');
+
+      agenda.every('3 minutes', 'digest');
+      agenda.start();
     }
   });
 }
