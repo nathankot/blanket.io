@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
 module.exports = mongoose.model('Item', (function() {
 
   var schema = mongoose.Schema({
-    _source: { type: mongoose.Schema.Types.ObjectId, ref: 'Source' },
+    sources: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Source' }],
     url: { type: mongoose.SchemaTypes.Url, unique: true, required: true },
     title: String,
     summary: String,

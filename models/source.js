@@ -101,8 +101,15 @@ module.exports = mongoose.model('Source', (function() {
         _.map(newItems, function(item) {
           return Q.ninvoke(item, 'save')
             .fail(function(err) {
-              if (err.name === 'ItemNotUniqueError') { return err.existing; }
-              else { throw err; }
+              if (err.name === 'ItemNotUniqueError') { 
+                var existing = err.existing;
+                if (!_.contains(existing.sources, source._id)) {
+                  existing.sources.push(source);
+                  return Q.ninvoke(existing, 'save');
+                } else {
+                  return err.existing; 
+                }
+              } else { throw err; }
             });
         })
       );
@@ -115,7 +122,7 @@ module.exports = mongoose.model('Source', (function() {
     })
     .then(function() {
       return Q.ninvoke(Item, 'find', { 
-        _source: source._id,
+        sources: source,
         createdAt: { $gt: since }
       });
     });
@@ -136,7 +143,7 @@ module.exports = mongoose.model('Source', (function() {
           if (err) { return deferred.reject(err); }
           deferred.resolve(_.map(JSON.parse(stdout), function(raw) {
             return new Item({
-              _source: source,
+              sources: [source],
               url: raw.url,
               title: raw.title,
               summary: raw.summary,

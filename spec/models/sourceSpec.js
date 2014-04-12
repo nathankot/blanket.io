@@ -164,7 +164,7 @@ describe('Model: Source', function() {
     });
 
     it('sets the source', function() {
-      expect(_.first(results)._source.toString()).to.equal(source._id.toString());
+      expect(_.first(results).sources[0].toString()).to.equal(source._id.toString());
     });
   });
 });
