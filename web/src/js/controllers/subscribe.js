@@ -11,6 +11,7 @@ angular.module('rssApp')
           $scope.save(subscriber)
           .then(function(subscriber) {
             $scope.user = subscriber;
+            $scope.subscribed = true;
           });
         }
       };

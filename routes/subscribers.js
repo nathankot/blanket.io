@@ -12,7 +12,7 @@ exports.create = function(req, res, next) {
   Q.ninvoke(
     new Subscriber({
       email: req.body.email,
-      sources: req.body.sources
+      sources: _.map(req.body.sources, function(s) { return s._id; })
     }), 
     'save'
   ).spread(function(subscriber) {

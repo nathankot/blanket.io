@@ -4,7 +4,7 @@
 </hgroup>
 
 <div class="subscription process">
-  <div 
+  <div
     ng-if="user.sources.length == 0"
     class="add sources"
     ng-controller="Sources"
@@ -12,14 +12,14 @@
 
     <h3>Where do you usually get your news?</h3>
 
-    <form 
+    <form
       name="form.source"
       class="new source"
       ng-submit="add(source)"
       >
 
-      <div 
-        class="errors" 
+      <div
+        class="errors"
         ng-show="form.source.$invalid && form.source.$dirty"
         >
         <ul>
@@ -37,7 +37,7 @@
         </ul>
       </div>
 
-      <input 
+      <input
         type="url"
         ng-model="source.url"
         name="url"
@@ -55,15 +55,15 @@
     </div>
 
     <div class="next" ng-if="sources.length > 0">
-      <div 
+      <div
         class="next button"
         ng-click="save(sources)"
       >Next</div>
     </div>
   </div>
 
-  <div 
-    ng-if="user.sources.length > 0 && !user.email" 
+  <div
+    ng-if="user.sources.length > 0 && !subscribed"
     class="set email"
     ng-controller="Subscribe"
     >
@@ -71,8 +71,8 @@
 
     <form name="form.subscriber">
 
-      <div 
-        class="errors" 
+      <div
+        class="errors"
         ng-show="form.subscriber.$invalid && form.subscriber.$dirty"
         >
         <ul>
@@ -88,19 +88,19 @@
 
       <div class="field">
         <label>Email</label>
-        <input 
+        <input
           type="email"
           name="email"
-          ng-model="subscriber.email"
+          ng-model="user.email"
           required
         />
       </div>
 
       <div class="field">
         <label>Send me news every</label>
-        <select 
+        <select
           name="deliveryFrequency"
-          ng-model="subscriber.deliveryFrequency"
+          ng-model="user.deliveryFrequency"
           required
           >
           <option value="1 day">Day</option>
@@ -109,7 +109,7 @@
         </select>
       </div>
 
-      <a href ng-click="submit(subscriber)">Save</a>
+      <a href ng-click="submit(user)">Save</a>
     </form>
 
   </div>
