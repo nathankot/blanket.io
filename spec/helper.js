@@ -69,19 +69,19 @@ exports.fakeItems = function(source) {
         url: 'http://www.sitepoint.com/opal-ruby-browser-basics/',
         sources: source ? [source] : [],
         title: Faker.Lorem.sentence(),
-        summary: Faker.Lorem.paragraph()
+        summary: Faker.Lorem.paragraph(Math.floor((Math.random()*100)+1))
       }),
       new Item({
         url: 'http://chrismorgan.info/blog/say-no-to-import-side-effects-in-python.html',
         sources: source ? [source] : [],
         title: Faker.Lorem.sentence(),
-        summary: Faker.Lorem.paragraph()
+        summary: Faker.Lorem.paragraph(Math.floor((Math.random()*100)+1))
       }),
       new Item({
         url: 'http://www.dragtimes.com/blog/tesla-model-s-ethernet-network-explored-possible-jailbreak-in-the-future',
         sources: source ? [source] : [],
         title: Faker.Lorem.sentence(),
-        summary: Faker.Lorem.paragraph()
+        summary: Faker.Lorem.paragraph(Math.floor((Math.random()*100)+1))
       })
     ];
   });
