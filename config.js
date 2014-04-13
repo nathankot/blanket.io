@@ -27,6 +27,9 @@ var config = {
   })()
 };
 
+console.log('logging mongohq url:');
+console.log(process.env.MONGOHQ_URL);
+
 if (process.env.NODE_ENV === 'production') {
   config.NODEMAILER_TRANSPORT_OPTIONS = {
     service: 'mandrill',
