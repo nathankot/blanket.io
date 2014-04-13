@@ -38,7 +38,7 @@ gulp.task('testScripts', function() {
 });
 
 gulp.task('styles', function() {
-  gulp.src('web/src/styl/app.styl')
+  var x = gulp.src('web/src/styl/app.styl')
       .pipe(stylus({
         paths: ['web/components/'],
         use: ['nib', 'axis-css'],
@@ -46,8 +46,11 @@ gulp.task('styles', function() {
         set: ['linenos']
       }))
       .pipe(csso(ENV === 'development'))
-      .pipe(gulp.dest(BUILD_PATH + '/css'))
-      .pipe(livereload());
+      .pipe(gulp.dest(BUILD_PATH + '/css'));
+
+  if (ENV === 'development') {
+    x.pipe(livereload());
+  }
 });
 
 gulp.task('views', function() {
