@@ -2,11 +2,14 @@
 
 var config = {
   MONGO_URL: (function() {
-    return process.env.MONGO_URL ||
-      process.env.MONGOHQ_URL ||
-      process.env.NODE_ENV === 'testing' ? 
-      'mongodb://localhost/blanket-test' :
-      'mongodb://localhost/blanket';
+    if (process.env.NODE_ENV === 'production') {
+      return process.env.MONGOHQ_URL;
+    } else {
+      return process.env.MONGO_URL ||
+        process.env.NODE_ENV === 'testing' ? 
+        'mongodb://localhost/blanket-test' :
+        'mongodb://localhost/blanket';
+    }
   })(),
 
   RSSLY_EXECUTABLE: 'bundle exec rssly',
@@ -26,9 +29,6 @@ var config = {
     else { return '1 day'; }
   })()
 };
-
-console.log('logging mongohq url:');
-console.log(process.env.MONGOHQ_URL);
 
 if (process.env.NODE_ENV === 'production') {
   config.NODEMAILER_TRANSPORT_OPTIONS = {
