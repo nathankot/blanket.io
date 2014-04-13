@@ -51,7 +51,11 @@ gulp.task('styles', function() {
 });
 
 gulp.task('views', function() {
-  gulp.src(['web/src/views/**/*.html', 'web/src/index.html'], { base: 'web/src' })
+  gulp.src([
+    'web/src/views/**/*.html',
+    'web/src/index.html',
+    'web/src/robots.txt'
+  ], { base: 'web/src' })
       .pipe(gulp.dest(BUILD_PATH));
 });
 
