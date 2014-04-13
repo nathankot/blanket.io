@@ -43,23 +43,6 @@ a, a:link, a:visited, a .yshortcuts
 a:visited
   color #000
 
-#templatePreheader
-  background-color #F4F4F4
-  border-bottom 1px solid #CCCCCC
-  display none !important
-
-.preheaderContent
-  color #808080
-  font-family font_family
-  font-size 10px
-  line-height 125%
-  text-align left
-
-.preheaderContent a:link, .preheaderContent a:visited,  .preheaderContent a .yshortcuts
-  color #606060
-  font-weight normal
-  text-decoration underline
-
 #templateHeader
   background-color #fff
   border-top 1px solid #FFFFFF
