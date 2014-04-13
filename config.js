@@ -27,4 +27,14 @@ var config = {
   })()
 };
 
+if (process.env.NODE_ENV === 'production') {
+  config.NODEMAILER_TRANSPORT_OPTIONS = {
+    service: 'mandrill',
+    auth: {
+      user: process.env.MANDRILL_USERNAME,
+      pass: process.env.MANDRILL_APIKEY
+    }
+  };
+}
+
 module.exports = config;
