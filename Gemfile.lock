@@ -26,7 +26,7 @@ GEM
     rfeedfinder (0.9.13)
       hpricot (>= 0.6)
       htmlentities (>= 4.0.0)
-    rssly (0.0.9)
+    rssly (0.0.10)
       addressable (~> 2.3)
       bloomfilter-rb (~> 2.1)
       feedbag (~> 0.9)
@@ -34,7 +34,6 @@ GEM
       json (~> 1.8.1)
       open_uri_redirections (~> 0.1.4)
       ots (~> 0.5)
-      redis (~> 3.0.7)
       rfeedfinder (~> 0.9)
       ruby-readability (~> 0.6)
       thor
