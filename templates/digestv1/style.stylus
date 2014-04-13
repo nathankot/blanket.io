@@ -1,19 +1,21 @@
 @import '../reset'
 
-/* TEMPLATE */
+font_family = Helvetica, Arial, sans-serif
+
 #bodyCell
   padding 20px
-  border-top 4px solid #BBBBBB
-  padding 10px !important
+  border-top 4px solid #BED6B3
+  padding 10px!important
+  padding-top 30px!important
 
 #templateContainer
   width 600px
-  border 1px solid #BBBBBB
+  border 1px solid #F1F1F1
   max-width 600px !important
   width 100% !important
 
 body, #bodyTable
-  background-color #DEE0E2
+  background-color #FAFAFA
 
 h1, h2, h3, h4, h5
   display block
@@ -25,11 +27,21 @@ h1, h2, h3, h4, h5
   margin-left 0
   text-align left
 
-h1, h2, h3, h4, h5, p
-  font-family Helvetica!important
+#bodyTable, h1, h2, h3, h4, h5, p
+  font-family font_family!important
   font-style normal
-  font-weight normal
+  font-weight 300
   font-size 16px
+
+a, a:link, a:visited, a .yshortcuts
+  font-weight normal
+  text-decoration underline
+
+a, a:link, a:visited, a .yshortcuts
+  color #EB4102
+
+a:visited
+  color #000
 
 #templatePreheader
   background-color #F4F4F4
@@ -38,7 +50,7 @@ h1, h2, h3, h4, h5, p
 
 .preheaderContent
   color #808080
-  font-family Helvetica
+  font-family font_family
   font-size 10px
   line-height 125%
   text-align left
@@ -48,14 +60,35 @@ h1, h2, h3, h4, h5, p
   font-weight normal
   text-decoration underline
 
+#templateHeader
+  background-color #fff
+  border-top 1px solid #FFFFFF
+
+.headerContent
+  padding-top 20px
+  padding-right 20px
+  padding-bottom 0
+  padding-left 20px
+
+h1.blanket-title
+  color #DFDFDF
+  text-shadow 1px 1px 0 #9C9C9C
+  font-size 26px!important
+
+.blanket-date
+  text-align right
+  font-size 14px
+  font-weight 300
+  color #D8D8D8
+
 #templateBody
-  background-color #F4F4F4
+  background-color #fff
   border-top 1px solid #FFFFFF
   border-bottom 1px solid #CCCCCC
 
 .item > .content
   color #505050
-  font-family Helvetica
+  font-family font_family
   font-size 14px
   line-height 150%
   padding-top 20px
@@ -67,28 +100,35 @@ h1, h2, h3, h4, h5, p
   line-height 125% !important
 
   .title
-    color #202020 !important
-    font-size 24px !important
+    color #6F6F6F !important
+    font-size 20px !important
     font-weight 300!important
     line-height 100% !important
 
   .url
-    color #606060 !important
-    font-style italic
+    font-style normal
     font-weight normal
     line-height 100%
-    font-size 14px !important
+    font-size 12px !important
     line-height 100% !important
+    a
+      color #E49F69!important
+      text-decoration none
+      font-weight 300
+
+  .read.more
+    display inline
+    font-size 12px!important
+    padding 3px 6px
+    background-color #DDDDDD
+    a
+      text-decoration none
+      color #fff
 
   img
     display inline
     height auto
     max-width 560px
-
-  a:link, a:visited, a .yshortcuts
-    color #EB4102
-    font-weight normal
-    text-decoration underline
 
 #templateFooter
   background-color #F4F4F4
@@ -96,7 +136,7 @@ h1, h2, h3, h4, h5, p
 
 .footerContent
   color #808080
-  font-family Helvetica
+  font-family font_family
   font-size 10px
   line-height 150%
   padding-top 20px
