@@ -1,5 +1,4 @@
 node_modules/
 web/components/
+web/tmp/
 web/dev/
-venv
-*.pyc

@@ -48,7 +48,7 @@ if (cluster.isMaster) {
   if ('development' == app.get('env')) {
     app.use(express.logger('dev'));
     app.use(express.errorHandler());
-    app.use(express.static(path.join(__dirname, 'web', 'dev')));
+    app.use(express.static(path.join(__dirname, 'web', 'tmp')));
   } else {
     app.use(express.logger());
     app.use(errorHandler());

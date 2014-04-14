@@ -1,5 +1,6 @@
 var ENV,
-    BUILD_PATH,
+    BUILD_PATH = 'web/tmp',
+    DEST_PATH = 'web/dist',
     gulp = require('gulp'),
     browserify = require('gulp-browserify'),
     ngmin = require('gulp-ngmin'),
@@ -8,11 +9,14 @@ var ENV,
     csso = require('gulp-csso'),
     concat = require('gulp-concat'),
     imagemin = require('gulp-imagemin'),
-    rev = require('gulp-rev-all'),
+    rev = require('gulp-rev'),
     clean = require('gulp-clean'),
     nodemon = require('gulp-nodemon'),
     livereload = require('gulp-livereload'),
     mocha = require('gulp-mocha');
+
+gulp.task('setProduction', function() { ENV = 'production'; });
+gulp.task('setDevelopment', function() { ENV = 'development'; });
 
 gulp.task('scripts', function() {
   var proc = gulp.src('web/src/js/app.js')
@@ -59,29 +63,24 @@ gulp.task('views', function() {
     'web/src/index.html',
     'web/src/robots.txt'
   ], { base: 'web/src' })
-      .pipe(gulp.dest(BUILD_PATH));
+  .pipe(gulp.dest(ENV === 'development' ? BUILD_PATH : DEST_PATH));
 });
 
 gulp.task('images', function() {
   gulp.src('web/src/images/**/*.(png|jpg|gif|svg)')
       .pipe(imagemin())
-      .pipe(gulp.dest(BUILD_PATH + '/images'));
-});
-
-gulp.task('setProduction', function() {
-  ENV = 'production';
-  BUILD_PATH = 'web/dist';
-});
-
-gulp.task('setDevelopment', function() {
-  ENV = 'development';
-  BUILD_PATH = 'web/dev';
+      .pipe(gulp.dest(
+        ENV === 'development' ? BUILD_PATH : DEST_PATH + '/images'
+      ));
 });
 
 gulp.task('rev', function() {
-  gulp.src(BUILD_PATH + '/**', { base: BUILD_PATH })
-      .pipe(rev())
-      .pipe(gulp.dest(BUILD_PATH));
+  if (ENV === 'production') {
+    gulp.src(BUILD_PATH + '/**', { base: BUILD_PATH })
+        .pipe(rev())
+        .pipe(rev.manifest())
+        .pipe(gulp.dest(DEST_PATH));
+  }
 });
 
 gulp.task('clean', function() {
