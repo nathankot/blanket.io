@@ -78,7 +78,7 @@ gulp.task('images', function() {
 gulp.task('rev', function(cb) {
   if (ENV === 'production') {
     gulp.src(BUILD_PATH + '/**/*.{html,js,css,svg,png,jpg,gif}')
-        .pipe(rev())
+        .pipe(rev({ ignoredExtensions: ['.html'] }))
         .pipe(gulp.dest(DIST_PATH));
   }
   
