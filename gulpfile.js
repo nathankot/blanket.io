@@ -1,6 +1,6 @@
-var ENV,
-    BUILD_PATH = 'web/tmp',
-    DEST_PATH = 'web/dist',
+var ENV = 'development',
+    BUILD_PATH = './web/tmp',
+    DIST_PATH = './web/dist',
     gulp = require('gulp'),
     browserify = require('gulp-browserify'),
     ngmin = require('gulp-ngmin'),
@@ -13,10 +13,10 @@ var ENV,
     clean = require('gulp-clean'),
     nodemon = require('gulp-nodemon'),
     livereload = require('gulp-livereload'),
-    mocha = require('gulp-mocha');
+    mocha = require('gulp-mocha'),
+    runSequence = require('run-sequence');
 
 gulp.task('setProduction', function() { ENV = 'production'; });
-gulp.task('setDevelopment', function() { ENV = 'development'; });
 
 gulp.task('scripts', function() {
   var proc = gulp.src('web/src/js/app.js')
@@ -29,16 +29,16 @@ gulp.task('scripts', function() {
     proc.pipe(ngmin()).pipe(uglify());
   }
 
-  proc.pipe(gulp.dest(BUILD_PATH + '/js'));
+  return proc.pipe(gulp.dest(BUILD_PATH + '/js'));
 });
 
 gulp.task('testScripts', function() {
-  gulp.src('web/src/js/spec/bootstrap.js', { base: 'web/src/js' })
-      .pipe(browserify({
-        transform: ['debowerify'],
-        debug: ENV === 'development'
-      }))
-      .pipe(gulp.dest(BUILD_PATH + '/js'));
+  return gulp.src('web/src/js/spec/bootstrap.js', { base: 'web/src/js' })
+        .pipe(browserify({
+          transform: ['debowerify'],
+          debug: ENV === 'development'
+        }))
+        .pipe(gulp.dest(BUILD_PATH + '/js'));
 });
 
 gulp.task('styles', function() {
@@ -53,38 +53,43 @@ gulp.task('styles', function() {
       .pipe(gulp.dest(BUILD_PATH + '/css'));
 
   if (ENV === 'development') {
-    x.pipe(livereload());
+    x = x.pipe(livereload());
   }
+
+  return x;
 });
 
 gulp.task('views', function() {
-  gulp.src([
+  return gulp.src([
     'web/src/views/**/*.html',
     'web/src/index.html',
     'web/src/robots.txt'
   ], { base: 'web/src' })
-  .pipe(gulp.dest(ENV === 'development' ? BUILD_PATH : DEST_PATH));
+  .pipe(gulp.dest(ENV === 'development' ? BUILD_PATH : DIST_PATH));
 });
 
 gulp.task('images', function() {
-  gulp.src('web/src/images/**/*.(png|jpg|gif|svg)')
-      .pipe(imagemin())
-      .pipe(gulp.dest(
-        ENV === 'development' ? BUILD_PATH : DEST_PATH + '/images'
-      ));
+  return gulp.src('web/src/images/**/*.(png|jpg|gif|svg)')
+        .pipe(imagemin())
+        .pipe(gulp.dest(
+          ENV === 'development' ? BUILD_PATH : DIST_PATH + '/images'
+        ));
 });
 
-gulp.task('rev', function() {
+gulp.task('rev', function(cb) {
   if (ENV === 'production') {
-    gulp.src(BUILD_PATH + '/**', { base: BUILD_PATH })
+    gulp.src(BUILD_PATH + '/**/*.{js,css,svg,png,jpg,gif}')
         .pipe(rev())
+        .pipe(gulp.dest(DIST_PATH))
         .pipe(rev.manifest())
-        .pipe(gulp.dest(DEST_PATH));
+        .pipe(gulp.dest(DIST_PATH));
   }
+  
+  cb();
 });
 
 gulp.task('clean', function() {
-  gulp.src([
+  return gulp.src([
     BUILD_PATH + '/js/**',
     BUILD_PATH + '/css/**',
     BUILD_PATH + '/views/**',
@@ -92,9 +97,33 @@ gulp.task('clean', function() {
   ], { read: false  }).pipe(clean());
 });
 
-gulp.task('all', ['scripts', 'styles', 'views', 'images']);
-gulp.task('dev', ['setDevelopment', 'clean', 'scripts', 'testScripts', 'styles', 'views', 'images']);
-gulp.task('dist', ['setProduction', 'clean', 'scripts', 'styles', 'views', 'images', 'rev']);
+gulp.task('clean-dist', function() {
+  return gulp.src([
+    DIST_PATH + '/js/**',
+    DIST_PATH + '/css/**',
+    DIST_PATH + '/views/**',
+    DIST_PATH + '/images/**'
+  ], { read: false  }).pipe(clean());
+});
+
+gulp.task('dev', function(cb) {
+  runSequence(
+    'clean',
+    ['scripts', 'testScripts', 'styles', 'views', 'images'],
+    cb
+  );
+});
+
+gulp.task('dist', function(cb) {
+  runSequence(
+    'clean',
+    'clean-dist',
+    'setProduction',
+    ['scripts', 'styles', 'views', 'images'],
+    'rev',
+    cb
+  );
+});
 
 gulp.task('server', function() {
   nodemon({
@@ -107,7 +136,7 @@ gulp.task('server', function() {
 
 gulp.task('test', function() {
   process.env.NODE_ENV = 'testing';
-  gulp.src('spec/**/*Spec.js')
+  return gulp.src('spec/**/*Spec.js')
       .pipe(mocha({ reporter: 'dot', bail: false }))
       .on('error', function() {});
 });
