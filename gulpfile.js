@@ -9,12 +9,13 @@ var ENV = 'development',
     csso = require('gulp-csso'),
     concat = require('gulp-concat'),
     imagemin = require('gulp-imagemin'),
-    rev = require('gulp-rev'),
+    rev = require('gulp-rev-all'),
     clean = require('gulp-clean'),
     nodemon = require('gulp-nodemon'),
     livereload = require('gulp-livereload'),
     mocha = require('gulp-mocha'),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    through = require('through2');
 
 gulp.task('setProduction', function() { ENV = 'production'; });
 
@@ -65,23 +66,19 @@ gulp.task('views', function() {
     'web/src/index.html',
     'web/src/robots.txt'
   ], { base: 'web/src' })
-  .pipe(gulp.dest(ENV === 'development' ? BUILD_PATH : DIST_PATH));
+  .pipe(gulp.dest(BUILD_PATH));
 });
 
 gulp.task('images', function() {
   return gulp.src('web/src/images/**/*.(png|jpg|gif|svg)')
         .pipe(imagemin())
-        .pipe(gulp.dest(
-          ENV === 'development' ? BUILD_PATH : DIST_PATH + '/images'
-        ));
+        .pipe(gulp.dest(BUILD_PATH));
 });
 
 gulp.task('rev', function(cb) {
   if (ENV === 'production') {
-    gulp.src(BUILD_PATH + '/**/*.{js,css,svg,png,jpg,gif}')
+    gulp.src(BUILD_PATH + '/**/*.{html,js,css,svg,png,jpg,gif}')
         .pipe(rev())
-        .pipe(gulp.dest(DIST_PATH))
-        .pipe(rev.manifest())
         .pipe(gulp.dest(DIST_PATH));
   }
   
