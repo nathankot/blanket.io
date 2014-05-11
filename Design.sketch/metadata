@@ -3,28 +3,26 @@
 <plist version="1.0">
 <dict>
 	<key>app</key>
-	<string>com.bohemiancoding.sketch.beta</string>
+	<string>com.bohemiancoding.sketch3.beta</string>
 	<key>build</key>
-	<integer>5347</integer>
+	<integer>7595</integer>
 	<key>commit</key>
-	<string>9c36051e8fd492279e960780830d475c5696520c</string>
+	<string>34b5777403d6234c093967ba3e8aa941bff3a8cc</string>
 	<key>fonts</key>
 	<array>
 		<string>AvenirNext-Regular</string>
-		<string>ProximaNova-Regular</string>
-		<string>ProximaNova-Light</string>
-		<string>ProximaNova-Light</string>
-		<string>ProximaNova-Regular</string>
+		<string>ProximaNova-RegularIt</string>
 		<string>ProximaNova-Light</string>
 		<string>ProximaNova-Regular</string>
-		<string>ProximaNova-Light</string>
-		<string>ProximaNova-Light</string>
-		<string>ProximaNova-Light</string>
-		<string>AvenirNext-Regular</string>
+		<string>ProximaNova-LightIt</string>
+		<string>ProximaNovaT-Thin</string>
+		<string>AvenirNext-Medium</string>
+		<string>AvenirNext-Bold</string>
+		<string>Palatino-Italic</string>
 	</array>
 	<key>length</key>
-	<integer>46860</integer>
+	<integer>3013578</integer>
 	<key>version</key>
-	<integer>18</integer>
+	<integer>36</integer>
 </dict>
 </plist>
