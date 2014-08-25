@@ -70,9 +70,11 @@ gulp.task('views', function() {
 });
 
 gulp.task('images', function() {
-  return gulp.src('web/src/images/**/*.(png|jpg|gif|svg)')
-        .pipe(imagemin())
-        .pipe(gulp.dest(BUILD_PATH));
+  return gulp.src([
+    'web/src/images/**/*'
+  ], { base: 'web/src' })
+  .pipe(imagemin())
+  .pipe(gulp.dest(BUILD_PATH));
 });
 
 gulp.task('rev', function(cb) {
@@ -152,5 +154,5 @@ gulp.task('default', ['dev'], function() {
   gulp.watch('web/src/js/spec/**/*.js', ['testScripts']);
   gulp.watch('web/src/styl/**/*.styl', ['styles']);
   gulp.watch(['web/src/views/**/*.html', 'web/src/index.html'], ['views']);
-  gulp.watch('web/stc/images/**/*.html', ['images']);
+  gulp.watch('web/src/images/**/*.html', ['images']);
 });
