@@ -19,6 +19,10 @@ exports.setupHNNocks = function() {
     .replyWithFile(200, __dirname + '/fixtures/hn_rss.xml');
 
   nock('http://www.sitepoint.com')
+    .get('/')
+    .replyWithFile(200, __dirname + '/fixtures/hn.html')
+    .get('/rss')
+    .replyWithFile(200, __dirname + '/fixtures/sitepoint_rss.xml')
     .get('/opal-ruby-browser-basics')
     .replyWithFile(200, __dirname + '/fixtures/hn/opal.html');
 
@@ -49,7 +53,8 @@ exports.fakeSources = function() {
     .then(function() {
       return Q.all([
         Q.ninvoke(new Source({ url: 'http://news.ycombinator.com' }), 'save'),
-        Q.ninvoke(new Source({ url: 'https://news.ycombinator.com/rss' }), 'save')
+        Q.ninvoke(new Source({ url: 'https://news.ycombinator.com/rss' }), 'save'),
+        Q.ninvoke(new Source({ url: 'http://www.sitepoint.com' }), 'save')
       ]);
     })
     .then(function(sources) {
@@ -65,7 +70,7 @@ exports.fakeSources = function() {
 exports.fakeItems = function(source) {
   return Q.fcall(function() {
     return [
-      new Item({ 
+      new Item({
         url: 'http://www.sitepoint.com/opal-ruby-browser-basics/',
         sources: source ? [source] : [],
         title: Faker.Lorem.sentence(),

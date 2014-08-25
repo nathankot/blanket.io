@@ -38,7 +38,7 @@ describe('Model: Subscriber', function() {
     helper.fakeSources()
     .then(function(s) {
       sources = s;
-      subscriber.sources = [sources[0]];
+      subscriber.sources = sources;
       return Q.ninvoke(subscriber, 'save');
     })
     .then(function() { done(); })
@@ -137,6 +137,15 @@ describe('Model: Subscriber', function() {
         // console.log(items);
         expect(items).to.be.an.instanceOf(Array);
         expect(_.first(items)).to.be.an.instanceOf(Item);
+        done();
+      })
+      .done();
+    });
+
+    it('should consider all sources', function(done) {
+      subscriber.getDigest()
+      .then(function (i) {
+        expect(i.length).to.equal(items.length * subscriber.sources.length);
         done();
       })
       .done();

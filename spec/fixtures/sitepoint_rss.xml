@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	xmlns:series="http://organizeseries.com/"
+	>
+
+<channel>
+	<title>SitePoint</title>
+	<atom:link href="http://www.sitepoint.com/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.sitepoint.com</link>
+	<description>Learn CSS &#124; HTML5 &#124; JavaScript &#124; Wordpress &#124; Tutorials-Web Development &#124; Reference &#124; Books and More</description>
+	<lastBuildDate>Mon, 25 Aug 2014 08:02:58 +0000</lastBuildDate>
+	<language>en-US</language>
+		<sy:updatePeriod>hourly</sy:updatePeriod>
+		<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.9.2</generator>
+	<item>
+		<title>Quick Tip: Install Zephir and Phalcon 2 on Vagrant</title>
+		<link>http://www.sitepoint.com/quick-tip-install-zephir-phalcon-2-vagrant/</link>
+		<comments>http://www.sitepoint.com/quick-tip-install-zephir-phalcon-2-vagrant/#comments</comments>
+		<pubDate>Sat, 23 Aug 2014 08:25:10 +0000</pubDate>
+		<dc:creator><![CDATA[Bruno Skvorc]]></dc:creator>
+				<category><![CDATA[Frameworks]]></category>
+		<category><![CDATA[Phalcon]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Web Foundations]]></category>
+		<category><![CDATA[BrunoS]]></category>
+		<category><![CDATA[homestead]]></category>
+		<category><![CDATA[homestead improved]]></category>
+		<category><![CDATA[install]]></category>
+		<category><![CDATA[laravel]]></category>
+		<category><![CDATA[nginx]]></category>
+		<category><![CDATA[phalcon]]></category>
+		<category><![CDATA[vagrant]]></category>
+		<category><![CDATA[zephir]]></category>
+
+		<guid isPermaLink="false">http://www.sitepoint.com/?p=88526</guid>
+		<description><![CDATA[<p><p>This <a href="">quick tip</a> will show you how to install Phalcon on a <a href="https://github.com/Swader/homestead_improved">Homestead Improved</a> instance, and will help you get a sample Phalcon app up and running.</p>
+
+<p>The version of Phalcon we’ll be using in this Quick Tip will be 2.0 - a pre-release. If you read this when Phalcon is already in a mature 2.x stage, let us know and we’ll update the post. To install the stable 1.x version, just run <code>sudo apt-get install php5-phalcon</code> and it should work.</p></p><p><em>Continue reading %<a rel="nofollow" href="http://www.sitepoint.com/quick-tip-install-zephir-phalcon-2-vagrant/">Quick Tip: Install Zephir and Phalcon 2 on Vagrant</a>%</em></p>]]></description>
+		<wfw:commentRss>http://www.sitepoint.com/quick-tip-install-zephir-phalcon-2-vagrant/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Building a Library with RequireJS</title>
+		<link>http://www.sitepoint.com/building-library-with-requirejs/</link>
+		<comments>http://www.sitepoint.com/building-library-with-requirejs/#comments</comments>
+		<pubDate>Fri, 22 Aug 2014 19:00:59 +0000</pubDate>
+		<dc:creator><![CDATA[Emre Guneyler]]></dc:creator>
+				<category><![CDATA[JavaScript]]></category>
+		<category><![CDATA[Tools and Libraries]]></category>
+		<category><![CDATA[amd modules]]></category>
+		<category><![CDATA[javascript modules]]></category>
+		<category><![CDATA[LouisL]]></category>
+		<category><![CDATA[RequireJS]]></category>
+
+		<guid isPermaLink="false">http://www.sitepoint.com/?p=88485</guid>
+		<description><![CDATA[<p><p><a href="http://requirejs.org/">RequireJS</a> is an AMD module loader for browsers that can load your script and CSS files asynchronously. You no longer have to deal with the order of script files inside an individual file (e.g. index.html). Instead, you just wrap your code inside module definitions and RequireJS will take care of the dependencies, making your code more structured and well organized. It also has an optimizer tool that uglifies and concatenates the files for production use.</p>
+
+<p>The official site provides <a href="http://requirejs.org/docs/api.html">extensive documentation</a> about its API, and there are many example repositories to help you. But it has a lot of configuration and it is tricky at first to get started with RequireJS.</p>
+
+<p>In this article we will learn how to use RequireJS by building a library using AMD modules, optimizing it and exporting it as a standalone module using the RequireJS optimizer. Later we will use RequireJS to build an application and consume our library.</p>
+
+
+
+<h2 id="installing-requirejs">Installing RequireJS</h2>
+
+<p>RequireJS is available through bower:</p>
+
+[code language="bash"]
+bower install requirejs --save
+[/code]
+
+<p>or you can grab the files on <a href="https://github.com/jrburke/requirejs">github</a>.</p>
+
+<p>There is also a <a href="https://github.com/danheberden/yeoman-generator-requirejs">Grunt-based Yeoman generator</a> for RequireJS projects.</p>
+
+
+
+<h2 id="defining-an-amd-module">Defining an AMD module</h2>
+
+<p>We will wrap our code inside <code>define()</code>, and that will make it an AMD module.</p>
+
+<p>File: <code>mylib.js</code></p>
+
+[code language="javascript"]
+define(['jquery'], function($) {
+    // $ is jquery now.
+
+    return 'mylib';
+});
+[/code]
+
+<p>That’s it. Note that <code>define()</code> takes an optional first argument of a dependency array, in this case it is <code>['jquery']</code>. It’s the dependency list for this module. All the modules inside the array will be loaded before this module. When this module is executed, the arguments are the corresponding modules in the dependency array.</p>
+
+<p>So in this case jQuery will be loaded first, then passed into the function as parameter <code>$</code>, then we can safely use it inside our module. Finally our module returns a string. The return value is what gets passed to the function parameter when this module is required.</p></p><p><em>Continue reading %<a rel="nofollow" href="http://www.sitepoint.com/building-library-with-requirejs/">Building a Library with RequireJS</a>%</em></p>]]></description>
+		<wfw:commentRss>http://www.sitepoint.com/building-library-with-requirejs/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>A New Cross Platform Option, Introducing Intel XDK</title>
+		<link>http://www.sitepoint.com/introduction-intel-xdk/</link>
+		<comments>http://www.sitepoint.com/introduction-intel-xdk/#comments</comments>
+		<pubDate>Fri, 22 Aug 2014 18:30:58 +0000</pubDate>
+		<dc:creator><![CDATA[Aleksander Koko]]></dc:creator>
+				<category><![CDATA[Android]]></category>
+		<category><![CDATA[App Development]]></category>
+		<category><![CDATA[Firefox OS]]></category>
+		<category><![CDATA[HTML5]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[Mobile]]></category>
+		<category><![CDATA[Mobile Web Development]]></category>
+		<category><![CDATA[Tools and Libraries]]></category>
+		<category><![CDATA[Windows Phone]]></category>
+		<category><![CDATA[chrisw]]></category>
+		<category><![CDATA[cross platform]]></category>
+		<category><![CDATA[intel]]></category>
+		<category><![CDATA[tools]]></category>
+
+		<guid isPermaLink="false">http://www.sitepoint.com/?p=88304</guid>
+		<description><![CDATA[<p><p><a target="_blank" href="https://software.intel.com/en-us/html5/tools">Intel XDK</a> is a new tool for developing cross platform mobile applications. It attempts to keep the process simple by including all possible target platforms in one package and collecting several tools that may be familiar and useful to you.</p>
+
+<p>In this article I will explain what Intel XDK is and prepare you to start building an app for every mobile platform using HTML5. The interface is easy but different from other IDEs. We will explore everything step by step.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>You can find Intel XDK at the <a target="_blank" href="https://software.intel.com/en-us/html5/tools">official web site</a>. It is available for Windows, Linux and Mac. When you first start the Software you will need to create an account so that you can use the build features. With this service you can host your projects in the Cloud and build them from there. After creating an account, sign in and you are ready to start with it.</p>
+
+<blockquote>
+<p><strong>NOTE:</strong> . I occurred some problems when trying to install Intel XDK on Debian. On Ubuntu which is Debian based it performs well. I haven&#8217;t tried it yet with other Linux distros but leave a comment if you find any problems.</p>
+</blockquote>
+
+<h2 id="workflow">Workflow</h2>
+
+<p>What I like the most about the XDK IDE is that it includes all the tools to fully develop an app from start to publishing. Development, Emulation, Testing, Debugging, Profiling and Building are all included. There is also a special feature for third party Services. All of this workflow is organized into 7 tabs that are in an appropriate order. </p>
+
+<p>The development tab is where you are going to spend the most of your time. You can develop your app using the drag and drop tools (App Designer and App Starter) or the text editor. The text editor is based on <a target="_blank" href="http://brackets.io/">Bracket editor</a> which is an open source editor build using HTML5. Bracket is maintained by Adobe. For the drag and drop prototyping you can choose App Designer or App Starter. App Starter is a simple tool and is aimed for beginners. It only supports the <a target="_blank" href="http://app-framework-software.intel.com/">App Framework</a>. App Designer is a more complex tool than App Starter with more features. It supports <a target="_blank" href="http://app-framework-software.intel.com/">App Framework</a>, <a target="_blank" href="http://getbootstrap.com/">Bootstrap 3</a>, <a target="_blank" href="http://jquerymobile.com/">JQuery Mobile</a> and <a target="_blank" href="http://topcoat.io/">TopCoat</a>. When developing with the drag and drop tools and the code editor, you can switch back and fourth. You can also use both of them side by side. I personally choose not to use the GUI building tools as they produce too much unnecessary code. I like to code everything from scratch as the whole project is more maintainable and your code is cleaner when you code from scratch. One feature that I love to play with is the live preview on device, you can easily code and preview live on a connected device.</p></p><p><em>Continue reading %<a rel="nofollow" href="http://www.sitepoint.com/introduction-intel-xdk/">A New Cross Platform Option, Introducing Intel XDK</a>%</em></p>]]></description>
+		<wfw:commentRss>http://www.sitepoint.com/introduction-intel-xdk/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Sass 3.4 is Out!</title>
+		<link>http://www.sitepoint.com/sass-3-4-is-out/</link>
+		<comments>http://www.sitepoint.com/sass-3-4-is-out/#comments</comments>
+		<pubDate>Fri, 22 Aug 2014 18:00:05 +0000</pubDate>
+		<dc:creator><![CDATA[Hugo Giraudel]]></dc:creator>
+				<category><![CDATA[CSS]]></category>
+		<category><![CDATA[Sass]]></category>
+		<category><![CDATA[LouisL]]></category>
+		<category><![CDATA[Sass 3.4]]></category>
+
+		<guid isPermaLink="false">http://www.sitepoint.com/?p=88475</guid>
+		<description><![CDATA[<p><p>Only a couple of months after Sass 3.3, <a href="http://blog.sass-lang.com/posts/221239-sass-34-is-released">version 3.4 has already shipped</a> under the code name “Selective Steve”. Quite an odd name but we’ll see that the name is pretty accurate since most new features are about selectors.</p>
+
+<h2 id="parent-selector-in-sassscript">The Parent selector <code>&#038;</code> in SassScript</h2>
+
+<p><em>“In SassScrwhat?”</em> you ask. You can think of <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#sassscript">SassScript</a> as the language of Sass. Sass is the eco-system, the preprocessor, while SassScript is what makes Sass, well… Sass, under the hood. Or as <a href="http://blog.sass-lang.com/posts/221239-sass-34-is-released">Natalie Weizenbaum puts it</a>:</p>
+
+<blockquote>
+  <p>“SassScript” is what we call the mini-language Sass uses for variables, property values, and so forth. It’s mostly just CSS values, but it also supports custom functions, arithmetic, and so forth.</p>
+</blockquote>
+
+<p>Before Sass 3.4, you couldn’t do much with the <em>parent selector</em> (although I hate this name since it’s not a parent selector but a reference to the current selector, which is utterly different but whatever), except things like:</p>
+
+[code language="sass"]
+.selector {
+  .no-svg &#038; {
+    // Stuff
+  }
+
+  &#038;:hover {
+    // (H)o(v&#124;th)er stuff (see what I did there?)
+  }
+}
+[/code]
+
+<p>Well, now we can do much more. At first, this new feature was supposed to come with Sass 3.3 but <a href="http://blog.sass-lang.com/posts/184092-a-change-in-plans-for-sass-33">it got delayed</a> because of technical issues.</p>
+
+<p>Basically, you can now manipulate <code>&#038;</code> as you can any other variable. It always contains a list of lists, as you would expect it to.</p>
+
+<p>For instance, if you have a selector like <code>.foo .bar, .baz</code>, then the upper list for <code>&#038;</code> would contain 2 items: <code>.foo .bar</code> and <code>.baz</code>, both of them being lists. Then, the first contains 2 items as well (<code>.foo</code> and <code>.bar</code>), while the second only contains one (<code>.baz</code>).</p>
+
+<p>Beware, the SassScript representation of a selector made of a single <em>part</em> is still a 2-level deep list. For instance <code>.item</code> would be <code>((item,),)</code>. So if you want to grab <code>.item</code> from <code>&#038;</code>, you’d have to run <code>nth(nth(&#038;, 1), 1)</code> (first item of the first item of <code>&#038;</code>).</p>
+
+<p>Okay so it’s probably not quite obvious why we would need something like this. Admittedly, while it’s true we’ve been doing without this for a while now, there is one specific thing — which happens quite frequently actually — that we couldn’t do until now:</p></p><p><em>Continue reading %<a rel="nofollow" href="http://www.sitepoint.com/sass-3-4-is-out/">Sass 3.4 is Out!</a>%</em></p>]]></description>
+		<wfw:commentRss>http://www.sitepoint.com/sass-3-4-is-out/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>On Our Radar This Week: Videos and Version Control</title>
+		<link>http://www.sitepoint.com/radar-week-videos-version-control/</link>
+		<comments>http://www.sitepoint.com/radar-week-videos-version-control/#comments</comments>
+		<pubDate>Fri, 22 Aug 2014 17:00:32 +0000</pubDate>
+		<dc:creator><![CDATA[James Hibbard]]></dc:creator>
+				<category><![CDATA[News]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[AdamR]]></category>
+		<category><![CDATA[capybara]]></category>
+		<category><![CDATA[git]]></category>
+		<category><![CDATA[news]]></category>
+		<category><![CDATA[on our radar]]></category>
+		<category><![CDATA[rails]]></category>
+		<category><![CDATA[ruby]]></category>
+		<category><![CDATA[style guide]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">http://www.sitepoint.com/?p=88382</guid>
+		<description><![CDATA[<p><p>Welcome to On Our Radar, a weekly round-up of news, trends and other cool stuff from the world of web development.</p>
+
+<p>This week Twitter announced it would <a href="http://www.theguardian.com/technology/2014/aug/20/twitter-tweets-timeline-follow">show you tweets from people you don’t follow</a> (which met with the kind of reaction you might expect), <a href="http://www.winbeta.org/news/former-microsoft-ceo-steve-ballmer-resigns-microsofts-board-directors">Steve Ballmer resigned from Microsoft’s Board of Directors</a> (presumably to concentrate on <a href="http://www.theverge.com/2014/8/18/6033963/steve-ballmer-is-very-excited-to-be-the-new-owner-of-the-la-clippers">that basketball team he bought</a> recently) and we were assured that <a href="http://www.technologyreview.com/news/530161/despite-the-latest-creaks-the-internet-isnt-close-to-breaking/">the Internet isn’t close to breaking</a> (Phew!)</p><div class="se-section-delimiter"></div>
+
+<h2 id="video">Video</h2>
+
+<p>Video is a fantastic medium to help you build rapport with your users and to get your message across quickly and entertainingly. Here are <a href="http://www.sitepoint.com/accessible-video/">eight steps to making video accessible</a>, so that you can reach more users than ever.</p>
+
+<p>If you’re embedding YouTube videos on your site, <a href="https://github.com/mike-zarandona/prettyembed.js">this library will make them prettier</a> (be sure to check out <a href="http://codepen.io/mike-zarandona/full/FELxi/">the demo</a>). Here’s a tutorial on <a href="http://www.sitepoint.com/uploading-videos-youtube-rails/">uploading videos to YouTube programmatically</a> using Rails. And this site provides you with a quick and easy <a href="https://gifyoutube.com/">method of creating an animated gif from any YouTube video</a>. Much fun!</p>
+
+<p>Used sparingly, video backgrounds can really bring a website to life. Here are <a href="http://www.creativebloq.com/web-design/video-backgrounds-2131982">16 such examples to inspire you</a>, as well as <a href="http://bashooka.com/coding/jquery-plugins-for-fullscreen-background-image-video/">a round-up of the best libraries to achieve this effect</a>.</p>
+
+<p>Finally, can you tell <a href="http://www.theverge.com/2014/8/18/6038605/elon-musk-youtube-quiz">who said it: Elon Musk, or a random YouTube commenter?</a></p><div class="se-section-delimiter"></div></p><p><em>Continue reading %<a rel="nofollow" href="http://www.sitepoint.com/radar-week-videos-version-control/">On Our Radar This Week: Videos and Version Control</a>%</em></p>]]></description>
+		<wfw:commentRss>http://www.sitepoint.com/radar-week-videos-version-control/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Diffbot: Repeated Collections and Merged APIs</title>
+		<link>http://www.sitepoint.com/diffbot-repeated-collections-merged-apis/</link>
+		<comments>http://www.sitepoint.com/diffbot-repeated-collections-merged-apis/#comments</comments>
+		<pubDate>Fri, 22 Aug 2014 17:00:03 +0000</pubDate>
+		<dc:creator><![CDATA[Bruno Skvorc]]></dc:creator>
+				<category><![CDATA[APIs]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[ai]]></category>
+		<category><![CDATA[api]]></category>
+		<category><![CDATA[crawling]]></category>
+		<category><![CDATA[Diffbot]]></category>
+		<category><![CDATA[machine learning]]></category>
+
+		<guid isPermaLink="false">http://www.sitepoint.com/?p=87434</guid>
+		<description><![CDATA[<p><p>In the previous post on <a href="http://www.sitepoint.com/harvest-sitepoint-author-portfolios-diffbot">Harvesting SitePoint Authors’ Profiles with Diffbot</a> we built a Custom API that automatically paginates an author’s list of work and extracts his name, bio and a list of posts with basic data (URL, title and date stamp). In this post, we’ll extract the links to the author’s social networks.</p>
+
+
+
+<h2 id="introduction">Introduction</h2>
+
+<p>If you look at the social network icons inside an author’s bio frame on their profile page, you’ll notice they vary. There can be none, or there can be eight, or anything in between. What’s worse, the links aren’t classed in any semantically meaningful way - they’re just links with an icon and a href attribute. </p>
+
+<p><img src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/140749501605.png" alt="" title=""/></p>
+
+<p>This makes turning them into an extractable pattern difficult, and yet that’s exactly what we’ll be doing here because hey, who doesn’t love a challenge?</p>
+
+<p>To get set up, please read and go through the <a href="http://www.sitepoint.com/harvest-sitepoint-author-portfolios-diffbot">first part</a>. When you’re done, re-enter the dev dashboard.</p>
+
+<h2 id="repeated-collections-problem">Repeated Collections Problem</h2>
+
+<p>The logical approach would be to define a new collection just like for posts, but one that targets the social network links. Then, just target the href attribute on each and we’re set, right? Nope.</p></p><p><em>Continue reading %<a rel="nofollow" href="http://www.sitepoint.com/diffbot-repeated-collections-merged-apis/">Diffbot: Repeated Collections and Merged APIs</a>%</em></p>]]></description>
+		<wfw:commentRss>http://www.sitepoint.com/diffbot-repeated-collections-merged-apis/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Better Content Creation for the Web</title>
+		<link>http://www.sitepoint.com/better-content-creation-web/</link>
+		<comments>http://www.sitepoint.com/better-content-creation-web/#comments</comments>
+		<pubDate>Fri, 22 Aug 2014 16:23:36 +0000</pubDate>
+		<dc:creator><![CDATA[Gabrielle Gosha]]></dc:creator>
+				<category><![CDATA[Content management]]></category>
+		<category><![CDATA[Content Marketing]]></category>
+		<category><![CDATA[Content strategy]]></category>
+		<category><![CDATA[Design]]></category>
+		<category><![CDATA[Marketing]]></category>
+		<category><![CDATA[UX]]></category>
+		<category><![CDATA[AlexW]]></category>
+
+		<guid isPermaLink="false">http://www.sitepoint.com/?p=88459</guid>
+		<description><![CDATA[<p><p>Ask yourself, what is one of the first things visitors look for when they reach your website? Other than a friendly interface for optimum usability, it’s the content.</p>
+
+<p>Content makes up the majority of your site so it is imperative that you pay attention when creating or redesigning your website.</p>
+
+<p>Though you learn earlier on in your career as a designer that your design can make or break your website, it should be noted that poor content can be damaging as well. In today’s article you will learn what makes good content and how to make the most out of it.</p>
+
+<h2>What is Good Content</h2>
+
+<img src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1408675388akaru.jpg" alt="Akaru" width="1339" height="651" class="aligncenter size-full wp-image-88464" />
+
+<h4><a href="http://www.akaru.fr/en/">http://www.akaru.fr/en/</a></h4>
+
+Of course, the first thing we need to define is what exactly constitutes as your content.
+
+<p>Your content is in the simplest terms the visuals, texts and any audio which appears within your design. In a nutshell, content can be classified as most of the things you see when you click on a site. The words you are reading right now are content.</p>
+
+<p>But what makes your content successful?</p>
+
+<p>To be blunt, your content is going to be a lot more successful if you cut out all those bells and whistles. Trust me, it isn’t as necessary as you think.</p>
+
+<p>The average person is going to care less about all your fancy parallax scrolling, jquery ajax and all that other stuff and care more about what you have to say.</p>
+
+<p>This delivers the first rule of good content: <em>keep it simple</em>. You’re not writing a university paper. Don’t cram long, flowery sentences in when all the user wants to know is what you do, and how much is it.</p>
+
+<p>Now that we have got that out of the way, let’s get to the meat of good, successful content.</p>
+
+<p>Generally your content should lend itself to answer questions, guide the visitor through your site and hopefully converts them from visitor to customer and/or consumer by the end of their virtual trip.</p>
+
+<p>If your website isn’t design to sell products or services, that’s ok, you can still follow these content creation guides. Just ensure your content is either informative and/or entertaining if your site leans in such a direction.</p></p><p><em>Continue reading %<a rel="nofollow" href="http://www.sitepoint.com/better-content-creation-web/">Better Content Creation for the Web</a>%</em></p>]]></description>
+		<wfw:commentRss>http://www.sitepoint.com/better-content-creation-web/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Build a New App with Laravel and EmberJS in Vagrant</title>
+		<link>http://www.sitepoint.com/build-new-app-laravel-emberjs-vagrant/</link>
+		<comments>http://www.sitepoint.com/build-new-app-laravel-emberjs-vagrant/#comments</comments>
+		<pubDate>Fri, 22 Aug 2014 16:00:27 +0000</pubDate>
+		<dc:creator><![CDATA[Aleksander Koko]]></dc:creator>
+				<category><![CDATA[APIs]]></category>
+		<category><![CDATA[Cloud Development]]></category>
+		<category><![CDATA[Deployment]]></category>
+		<category><![CDATA[Ember.js]]></category>
+		<category><![CDATA[Frameworks]]></category>
+		<category><![CDATA[JavaScript]]></category>
+		<category><![CDATA[Laravel]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[api]]></category>
+		<category><![CDATA[ember]]></category>
+		<category><![CDATA[emberjs]]></category>
+		<category><![CDATA[framework]]></category>
+		<category><![CDATA[Heroku]]></category>
+		<category><![CDATA[homestead]]></category>
+		<category><![CDATA[homestead improved]]></category>
+		<category><![CDATA[laravel]]></category>
+		<category><![CDATA[OOPHP]]></category>
+		<category><![CDATA[REST]]></category>
+		<category><![CDATA[restful]]></category>
+		<category><![CDATA[vagrant]]></category>
+
+		<guid isPermaLink="false">http://www.sitepoint.com/?p=87967</guid>
+		<description><![CDATA[<p><p>Nowadays, everything is turning into a web application. Even simple websites have a mobile app relying on a REST Api. Web applications are accessible everywhere - on a laptop, desktop, tablet, mobile, and recently on wearable devices like smartwatches. Everything is becoming smaller and faster - front ends are becoming separated from back ends, and only communicate with the server through APIs.</p>
+
+
+
+<h2 id="what-will-we-be-building">What will we be building?</h2>
+
+<p>In these series, we are going to create a photo uploading app. For the front-end, we will use <a href="http://emberjs.com">EmberJs</a> and <a href="http://foundation.zurb.com/">Foundation 5</a>. EmberJs is a front-end framework featuring good integration with REST Apis. Foundation 5 will help us make a fast prototype of our front end. For hosting, we will use <a href="http://heroku.com">Heroku</a>’s free tier (for more information about PHP on Heroku, see <a href="http://www.sitepoint.com/8-heroku-addons-production-ready-apps/">here</a>). For the back-end, we will use <a href="http://sitepoint.com/tag/laravel">Laravel</a>. The source code will be available per-part, and in final shape in the final part of this series. You can download the code for part 1 <a href="https://github.com/sitepoint-examples/sitepoint-RESTAPI-laravel-emberJs-part1">here</a>.</p>
+
+
+
+<h2 id="lets-get-started">Let’s get started</h2>
+
+<p>A good way to start a new project in PHP is using <a href="http://www.sitepoint.com/tag/vagrant/">Vagrant</a>. Vagrant gives us the space to experiment a lot from project to project. I can have different PHP versions if I want with Apache for one project, Nginx for another. If something goes bad, I revert all my work and simply <code>vagrant up</code> after that - and I never pollute my host operating system with various other installations.</p>
+
+<p>The easiest way to get started is by following this <a href="http://www.sitepoint.com/quick-tip-get-homestead-vagrant-vm-running/">quick tip</a>, which will take you through a fast installation process and show you a working Laravel app in a matter of minutes so you can start hacking away. If you’re still not convinced why you should use Homestead and Vagrant, see <a href="http://www.sitepoint.com/6-reasons-move-laravel-homestead/">here</a>.</p></p><p><em>Continue reading %<a rel="nofollow" href="http://www.sitepoint.com/build-new-app-laravel-emberjs-vagrant/">Build a New App with Laravel and EmberJS in Vagrant</a>%</em></p>]]></description>
+		<wfw:commentRss>http://www.sitepoint.com/build-new-app-laravel-emberjs-vagrant/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+
+		<series:name><![CDATA[REST App with Laravel and EmberJS]]></series:name>
+	</item>
+		<item>
+		<title>Setting Minimum Checkout Requirements in WooCommerce</title>
+		<link>http://www.sitepoint.com/minimum-checkout-requirements-in-woocommerce/</link>
+		<comments>http://www.sitepoint.com/minimum-checkout-requirements-in-woocommerce/#comments</comments>
+		<pubDate>Thu, 21 Aug 2014 20:00:56 +0000</pubDate>
+		<dc:creator><![CDATA[Yojance Rabelo]]></dc:creator>
+				<category><![CDATA[WordPress]]></category>
+		<category><![CDATA[ChrisB]]></category>
+		<category><![CDATA[E-commerce]]></category>
+		<category><![CDATA[woocommerce]]></category>
+
+		<guid isPermaLink="false">http://www.sitepoint.com/?p=88430</guid>
+		<description><![CDATA[<p><p>Chances are that you want to set some kind of minimum requirements on your WooCommerce store before your customers checkout. What follows is a guide on how to set these requirements and restrictions, without needing to use any plugins at all:</p>
+
+<ul>
+<li>Setting A Minimum Weight Requirement Per Order</li>
+<li>Setting A Minimum Number Of Products Required Per Order</li>
+<li>Setting A Minimum Quantity Per Product</li>
+<li>Setting A Minimum Dollar Amount Per Order</li>
+</ul>
+
+<h3>Methods Used In This Article</h3>
+
+<p>There is always more than one way of setting minimum requirements in WooCommerce; the results might even be identical. But I consider the methods described below to be the right (or better) way of doing it. Any suggestions on how you accomplish these tasks or further improvements are always welcome and received well.</p>
+
+<p>The following code has been tested in the latest versions available for WordPress (3.9.1) and WooCommerce (2.1.12). We'll be using the dummy data provided for WooCommerce when you install the plugin. The code should go in your theme's functions.php file and is heavily commented so it's easier to follow and/or modify if needed.</p>
+
+<p>We are going to be using the <code>woocommerce_check_cart_items</code> action provided by WooCommerce to run our functions and execute our code. Visit the following link for a complete list of <a href="http://docs.woothemes.com/document/hooks/" title="WooCommerce actions and filters">WooCommerce actions and filters</a>, also known as hooks.</p></p><p><em>Continue reading %<a rel="nofollow" href="http://www.sitepoint.com/minimum-checkout-requirements-in-woocommerce/">Setting Minimum Checkout Requirements in WooCommerce</a>%</em></p>]]></description>
+		<wfw:commentRss>http://www.sitepoint.com/minimum-checkout-requirements-in-woocommerce/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>JavaScript Animations in AngularJS Applications</title>
+		<link>http://www.sitepoint.com/javascript-animations-angularjs-applications/</link>
+		<comments>http://www.sitepoint.com/javascript-animations-angularjs-applications/#comments</comments>
+		<pubDate>Thu, 21 Aug 2014 19:00:40 +0000</pubDate>
+		<dc:creator><![CDATA[Ravi Kiran]]></dc:creator>
+				<category><![CDATA[AngularJS]]></category>
+		<category><![CDATA[JavaScript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[angular animations]]></category>
+		<category><![CDATA[angular directives]]></category>
+		<category><![CDATA[angularjs]]></category>
+		<category><![CDATA[LouisL]]></category>
+
+		<guid isPermaLink="false">http://www.sitepoint.com/?p=88344</guid>
+		<description><![CDATA[<p><p><a href="https://angularjs.org/">AngularJS</a> is a feature-rich framework for creating single-page web applications, bringing all capabilities that one needs for building rich and interactive apps. One of the key features that Angular brings is the support of <a href="https://docs.angularjs.org/guide/animations">animations</a>.</p>
+
+<p>We can animate a portion of the application to indicate a change occurring. In my <a href="http://www.sitepoint.com/adding-css-animations-angularjs-applications/">last article</a> I covered the support of CSS animations in Angular applications. In this article, we will see how to leverage JavaScript to animate the AngularJS apps.</p>
+
+<p>In Angular, the only difference between CSS and JavaScript animations is their definition. There is no difference in the way the defined animations are used. To start with, we need to load the <code>ngAnimate</code> module to the root module of our application.</p>
+
+[code language="javascript"]
+angular.module('coursesApp', ['ngAnimate']);
+[/code]
+
+<p>The animation events to be handled in the JavaScript animation also remain the same. Following is a list of directives supporting animations and their events for different actions:</p>
+
+<table>
+<thead>
+<tr>
+<th>Directives</th>
+<th>Events</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ng-view <br /> ng-include <br /> ng-switch <br /> ng-if</td>
+<td>enter <br /> leave</td>
+</tr>
+<tr>
+<td>ng-repeat</td>
+<td>enter <br /> leave <br /> move</td>
+</tr>
+<tr>
+<td>ng-show <br /> ng-hide <br /> ng-class</td>
+<td>add <br /> remove</td>
+</tr>
+</tbody>
+</table>
+
+<p>The above listing is the same as the one in the previous article, but doesn’t mention the corresponding CSS classes, as we don’t need them to define JavaScript animations. These events are generated only if the application module loads the <code>ngAnimate</code> module. Now let us see how to animate some of the directives.</p></p><p><em>Continue reading %<a rel="nofollow" href="http://www.sitepoint.com/javascript-animations-angularjs-applications/">JavaScript Animations in AngularJS Applications</a>%</em></p>]]></description>
+		<wfw:commentRss>http://www.sitepoint.com/javascript-animations-angularjs-applications/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using memcached
+Object Caching 932/956 objects using memcached
+Content Delivery Network via Amazon Web Services: CloudFront: dab1nmslvvntp.cloudfront.net
+
+ Served from: www.sitepoint.com @ 2014-08-25 03:01:30 by W3 Total Cache -->
