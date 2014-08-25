@@ -69,7 +69,10 @@ module.exports = mongoose.model('Subscriber', (function() {
         throw new Error('No new items.');
       }
 
-      return template('digestv1', { items: items });
+      return template('digestv1', {
+        items: items,
+        subscriber: subscriber
+      });
     })
     .then(function(email) {
       return Q.ninvoke(transport, 'sendMail', {

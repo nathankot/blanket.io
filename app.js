@@ -83,7 +83,10 @@ if (cluster.isMaster) {
       app.get('/dev/email/:type?', function(req, res, next) {
         helper.fakeItems()
         .then(function(items) {
-          return template('digestv1', { items: items });
+          return template('digestv1', {
+            items: items,
+            subscriber: { email: 'test@email.com' }
+          });
         })
         .then(function(meta) {
           res.send(200, (function() {
