@@ -1,116 +1,120 @@
-<hgroup class="headline">
-  <h2>Stop compulsively checking the news.</h2>
-  <h2>Let your news come to you.</h2>
-</hgroup>
+<div class="content">
+  <div ng-hide="user.subscribed" class="subscription process">
 
-<div class="subscription process">
-  <div
-    ng-if="user.sources.length == 0"
-    class="add sources"
-    ng-controller="Sources"
-    >
-
-    <h3>Where do you usually get your news?</h3>
-
-    <form
-      name="form.source"
-      class="new source"
-      ng-submit="add(source)"
+    <div
+      class="add sources"
+      ng-controller="Sources"
       >
 
-      <div
-        class="errors"
-        ng-show="form.source.$invalid && form.source.$dirty"
+      <form
+        name="form.source"
+        class="new source"
+        ng-hide="user.sources.length > 0"
+        ng-submit="add(source)"
         >
-        <ul>
-          <li ng-show="form.source.url.$error.required">
-            Please enter a website.
-          </li>
 
-          <li ng-show="form.source.url.$error.url">
-            Please enter a valid URL.
-          </li>
+        <h3>
+          Send me a digest of the following RSS feeds:
+          <select
+            name="deliveryFrequency"
+            ng-model="user.deliveryFrequency"
+            required
+            >
+            <option value="1 day">Daily</option>
+            <option value="1 week">Weekly</option>
+            <option value="1 month">Monthly</option>
+          </select>
+        </h3>
 
-          <li ng-show="form.source.url.$error.unique">
-            This site already exists.
-          </li>
-        </ul>
-      </div>
+        <div
+          class="errors"
+          ng-show="form.source.$invalid && form.source.$dirty"
+          >
+          <ul>
+            <li ng-show="form.source.url.$error.required">
+              Please enter a website.
+            </li>
 
-      <input
-        type="url"
-        ng-model="source.url"
-        name="url"
-        placeholder="http://cnn.com"
-        required
-      >
+            <li ng-show="form.source.url.$error.url">
+              Please enter a valid URL.
+            </li>
 
-      <a href class="button" ng-click="add(source)">Add</a>
-    </form>
+            <li ng-show="form.source.url.$error.unique">
+              This site already exists.
+            </li>
+          </ul>
+        </div>
 
-    <div class="source list">
-      <ul ng-repeat="source in sources">
-        <li>{{ source.url }}</li>
-      </ul>
+        <div class="field">
+          <input
+            type="url"
+            ng-model="source.url"
+            name="url"
+            placeholder="https://news.ycombinator.com/rss"
+            required
+          >
+
+          <a href class="button" ng-click="add(source)">Add Feed</a>
+        </div>
+
+        <div class="source list">
+          <ul ng-repeat="source in sources">
+            <li>{{ source.url }}</li>
+          </ul>
+        </div>
+
+        <div class="field" ng-class="{ faded: sources.length === 0 }">
+          <a href class="button" ng-click="save(sources)">Next Step: your email</a>
+        </div>
+      </form>
     </div>
 
-    <div class="next" ng-if="sources.length > 0">
-      <div
-        class="next button"
-        ng-click="save(sources)"
-      >Next</div>
+    <div
+      class="set email"
+      ng-show="user.sources.length"
+      ng-controller="Subscribe"
+      >
+      <h3>Where do you want your digest to go?</h3>
+
+      <form name="form.subscriber">
+
+        <div
+          class="errors"
+          ng-show="form.subscriber.$invalid && form.subscriber.$dirty"
+          >
+          <ul>
+            <li ng-show="form.subscriber.email.$error.required">
+              Please enter an email.
+            </li>
+
+            <li ng-show="form.subscriber.email.$error.email">
+              Please enter a valid email.
+            </li>
+
+            <li ng-show="form.subscriber.email.$error.processable">
+              Your email is already in use. Settings management is coming soon.
+            </li>
+          </ul>
+        </div>
+
+        <div class="field">
+          <input
+            type="email"
+            name="email"
+            ng-model="user.email"
+            placeholder="Your email"
+            required
+          />
+
+          <a href class="button" ng-click="submit(user)">Cover me</a>
+        </div>
+      </form>
+
     </div>
   </div>
 
-  <div
-    ng-if="user.sources.length > 0 && !subscribed"
-    class="set email"
-    ng-controller="Subscribe"
-    >
-    <h3>Sweet! Where do you want your news to go?</h3>
-
-    <form name="form.subscriber">
-
-      <div
-        class="errors"
-        ng-show="form.subscriber.$invalid && form.subscriber.$dirty"
-        >
-        <ul>
-          <li ng-show="form.subscriber.email.$error.required">
-            Please enter an email.
-          </li>
-
-          <li ng-show="form.subscriber.email.$error.email">
-            Please enter a valid email.
-          </li>
-        </ul>
-      </div>
-
-      <div class="field">
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          ng-model="user.email"
-          required
-        />
-      </div>
-
-      <div class="field">
-        <label>Send me news every</label>
-        <select
-          name="deliveryFrequency"
-          ng-model="user.deliveryFrequency"
-          required
-          >
-          <option value="1 day">Day</option>
-          <option value="1 week">Week</option>
-          <option value="1 month">Month</option>
-        </select>
-      </div>
-
-      <a href ng-click="submit(user)">Save</a>
-    </form>
-
+  <div class="subscription success" ng-show="user.subscribed">
+    <h1>All set! We've got you covered.</h1>
+    <h2>Your first digest will arrive in {{ user.deliveryFrequency }}</h2>
   </div>
 </div>

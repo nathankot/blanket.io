@@ -81,7 +81,7 @@ gulp.task('rev', function(cb) {
         .pipe(rev({ ignoredExtensions: ['.html'] }))
         .pipe(gulp.dest(DIST_PATH));
   }
-  
+
   cb();
 });
 

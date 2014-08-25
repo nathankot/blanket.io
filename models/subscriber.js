@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
     Q = require('q'),
     _ = require('lodash'),
     template = require('../lib/template.js'),
-    transport = require('../lib/mailer.js');
+    transport = require('../lib/mailer.js'),
+    uniqueValidator = require('mongoose-unique-validator');
 
 module.exports = mongoose.model('Subscriber', (function() {
 
@@ -81,6 +82,8 @@ module.exports = mongoose.model('Subscriber', (function() {
       return response;
     });
   };
+
+  schema.plugin(uniqueValidator);
 
   return schema;
 

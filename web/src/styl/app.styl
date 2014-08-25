@@ -1,12 +1,64 @@
 @import 'config'
+@import 'fonts'
 
 normalize()
 grid()
 
+*
+  box-sizing border-box!important
+
 body
   establish-baseline()
+
+h1, h2, h3, h4
+  font-weight 300
 
 .application.container
   max-width 940px
   margin 0 auto
 
+.header-bar
+  background #000
+  color white
+  padding .3rem 1rem
+  margin 0
+
+.app-name
+  font-weight 300
+
+.short-description
+  background #313131
+  color white
+  padding .3rem 1rem
+  margin 0
+
+.button
+  display inline-block
+  padding 0.5rem 1rem
+  background #4B4B4B
+  color white
+  border-radius 4px
+  text-decoration none
+
+input
+  padding 0.5rem 1rem
+  outline 0
+  border 1px solid #333
+  border-radius 3px
+
+.source.list
+  ul
+    list-style none
+    font-size 1.4rem
+    padding 0
+
+  li
+    display block
+    padding 0.2rem
+    background #FAFAFA
+
+.faded
+  opacity 0.4
+
+.field
+  margin 1rem 0

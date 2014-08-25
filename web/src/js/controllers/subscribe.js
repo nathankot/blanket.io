@@ -7,11 +7,15 @@ angular.module('rssApp')
 
       $scope.submit = function(subscriber) {
         $scope.form.subscriber.$setDirty();
+        $scope.form.subscriber.email.$setValidity('processable', true);
         if ($scope.form.subscriber.$valid) {
           $scope.save(subscriber)
           .then(function(subscriber) {
-            $scope.user = subscriber;
-            $scope.subscribed = true;
+            _.merge($scope.user, subscriber);
+            $scope.user.subscribed = true;
+          })
+          .catch(function(err) {
+            $scope.form.subscriber.email.$setValidity('processable', false);
           });
         }
       };

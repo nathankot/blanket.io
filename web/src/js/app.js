@@ -7,8 +7,8 @@ var app = angular.module('rssApp', [
   'ui.router',
   'restangular'
 ]).config(function (
-  $locationProvider, 
-  $stateProvider, 
+  $locationProvider,
+  $stateProvider,
   $urlRouterProvider,
   RestangularProvider
 ) {
@@ -18,7 +18,8 @@ var app = angular.module('rssApp', [
   RestangularProvider.setBaseUrl('/api/v1');
   $stateProvider.state('home', {
     url: '/',
-    templateUrl: 'views/landing.html'
+    templateUrl: 'views/landing.html',
+    controller: 'Landing'
   });
 }).run(function($rootScope) {
   $rootScope.user = {
