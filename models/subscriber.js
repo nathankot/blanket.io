@@ -65,6 +65,10 @@ module.exports = mongoose.model('Subscriber', (function() {
     var subscriber = this;
     return subscriber.getDigest()
     .then(function(items) {
+      if (!items.length) {
+        throw new Error('No new items.');
+      }
+
       return template('digestv1', { items: items });
     })
     .then(function(email) {
@@ -80,6 +84,9 @@ module.exports = mongoose.model('Subscriber', (function() {
       subscriber.lastDeliveryAt = Date.now();
       subscriber.save();
       return response;
+    })
+    .fail(function(err) {
+      console.info('No new items for ' + subscriber.email);
     });
   };
 
