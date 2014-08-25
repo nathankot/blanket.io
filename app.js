@@ -72,6 +72,7 @@ if (cluster.isMaster) {
       app.namespace('/v1', function() {
         app.post('/sources', sources.create);
         app.post('/subscribers', subscribers.create);
+        app.get('/unsubscribe/:email', subscribers.destroy);
       });
     });
 

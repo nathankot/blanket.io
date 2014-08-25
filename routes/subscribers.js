@@ -22,3 +22,9 @@ exports.create = function(req, res, next) {
   })
   .fail(function(err) { next(err); });
 };
+
+exports.destroy = function(req, res, next) {
+  Subscriber.remove({ email: req.params.email }).exec(function() {
+    res.send(200, "Done. You are unsubscribed.");
+  });
+};

@@ -35,36 +35,59 @@ describe('Route: subscribers', function() {
     };
   });
 
-  it('should respond with 201', function(done) {
-    cb = function(code, user) {
-      expect(code).to.match(/2\d\d/);
-      done();
-    };
+  describe('create', function() {
+    it('should respond with 201', function(done) {
+      cb = function(code, user) {
+        expect(code).to.match(/2\d\d/);
+        done();
+      };
 
-    subscribers.create(req, res, function(err) {
-      console.log(err);
+      subscribers.create(req, res, function(err) {
+        console.log(err);
+      });
+    });
+
+    it('should respond with a user', function(done) {
+      cb = function(code, user) {
+        expect(user.email).to.equal('me@nathankot.com');
+        done();
+      };
+
+      subscribers.create(req, res, function(err) {
+        console.log(err);
+      });
+    });
+
+    it('should populate user sources', function(done) {
+      cb = function(code, user) {
+        expect(user.sources[0].url).not.to.be.undefined;
+        done();
+      };
+
+      subscribers.create(req, res, function(err) {
+        console.log(err);
+      });
     });
   });
 
-  it('should respond with a user', function(done) {
-    cb = function(code, user) {
-      expect(user.email).to.equal('me@nathankot.com');
-      done();
-    };
+  describe('destroy', function() {
+    it('should remove the user', function(done) {
+      var subscriber = new Subscriber({
+        email: 'me@nathankot.com',
+        sources: sources
+      }).save(function(s) {
+        cb = function() {
+          Subscriber.find({ email: 'me@nathankot.com' }, function(err, subscribers) {
+            expect(subscribers.length).to.equal(0);
+          });
 
-    subscribers.create(req, res, function(err) {
-      console.log(err);
+          done();
+        };
+
+        req.params = { email: 'me@nathankot.com' };
+        subscribers.destroy(req, res, cb);
+      });
     });
   });
 
-  it('should populate user sources', function(done) {
-    cb = function(code, user) {
-      expect(user.sources[0].url).not.to.be.undefined;
-      done();
-    };
-
-    subscribers.create(req, res, function(err) {
-      console.log(err);
-    });
-  });
 });
