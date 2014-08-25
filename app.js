@@ -45,6 +45,14 @@ if (cluster.isMaster) {
   app.use(express.methodOverride());
   app.use(app.router);
 
+  app.use(function unprocessableErrorHandler(err, req, res, next) {
+    if (err.name === 'ValidationError') {
+      res.send(422, err);
+    } else {
+      next();
+    }
+  });
+
   if ('development' == app.get('env')) {
     app.use(express.logger('dev'));
     app.use(express.errorHandler());
@@ -78,15 +86,15 @@ if (cluster.isMaster) {
         })
         .then(function(meta) {
           res.send(200, (function() {
-            if (req.params.type && req.params.type === 'text') { 
-              return meta.text; 
+            if (req.params.type && req.params.type === 'text') {
+              return meta.text;
             } else { return meta.html; }
           })());
         })
         .done();
       });
     }
-  
+
   })();
 
   http.createServer(app).listen(app.get('port'), function(){
