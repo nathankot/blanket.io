@@ -112,7 +112,7 @@ if (cluster.isMaster) {
       var agenda = require('./lib/agenda.js'),
           digestJob = require('./jobs/digest.js');
 
-      agenda.every('3 minutes', 'digest');
+      agenda.every('5 minutes', 'digest');
       agenda.start();
     }
   });
