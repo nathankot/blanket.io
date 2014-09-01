@@ -14,7 +14,8 @@ agenda.define('digest', function(job, done) {
         .or([
           { lastDeliveryAt: { $lt: minDeliveredAt } },
           { lastDeliveryAt: null }
-        ]);
+        ])
+        .limit(1);
 
   Q.ninvoke(query, 'exec')
   .then(function(subs) {
