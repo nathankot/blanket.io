@@ -6,7 +6,7 @@ var config = {
       return process.env.MONGOHQ_URL;
     } else {
       return process.env.MONGO_URL ||
-        process.env.NODE_ENV === 'testing' ? 
+        process.env.NODE_ENV === 'testing' ?
         'mongodb://localhost/blanket-test' :
         'mongodb://localhost/blanket';
     }
@@ -21,8 +21,8 @@ var config = {
     port: '1025'
   },
 
-  EMAIL_FROM: 'digest@blanket.io',
-  EMAIL_DIGEST_SUBJECT: 'Your blanket.io digest',
+  EMAIL_FROM: 'digest@getblanket.com',
+  EMAIL_DIGEST_SUBJECT: 'Your Blanket Digest',
 
   DIGESTER_INTERVAL: (function() {
     if (process.env.NODE_ENV === 'development') { return '1 minute'; }
