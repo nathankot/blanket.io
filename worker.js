@@ -7,5 +7,5 @@ var _ = require('lodash'),
 var agenda = require('./lib/agenda.js'),
     digestJob = require('./jobs/digest.js');
 
-agenda.every('5 minutes', 'digest');
+agenda.every('10 minutes', 'digest');
 agenda.start();
