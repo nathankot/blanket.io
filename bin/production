@@ -1,2 +1,2 @@
 #!/bin/sh
-HEROKU_APP=blanketio exec heroku "$@"
+HEROKU_APP=blanketio HKAPP=blanketio exec "${HEROKU_COMMAND:-heroku}" "$@"
