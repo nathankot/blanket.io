@@ -89,6 +89,7 @@ module.exports = mongoose.model('Subscriber', (function() {
       return response;
     })
     .fail(function(err) {
+      console.error(err);
       console.info('No new items for ' + subscriber.email);
     });
   };
