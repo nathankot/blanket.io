@@ -1,3 +1,4 @@
+
 var ENV = 'development',
     BUILD_PATH = './web/tmp',
     DIST_PATH = './web/dist',
@@ -62,6 +63,7 @@ gulp.task('styles', function() {
 
 gulp.task('views', function() {
   return gulp.src([
+    'web/src/robots.txt',
     'web/src/views/**/*.html',
     'web/src/index.html',
     'web/src/robots.txt'
