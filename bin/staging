@@ -1,2 +1,0 @@
-#!/bin/sh
-HEROKU_APP=blanketio-staging HKAPP=blanketio-staging exec "${HEROKU_COMMAND:-heroku}" "$@"
