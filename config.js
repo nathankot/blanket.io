@@ -32,10 +32,11 @@ var config = {
 
 if (process.env.NODE_ENV === 'production') {
   config.NODEMAILER_TRANSPORT_OPTIONS = {
-    service: 'mandrill',
+    host: process.env.POSTMARK_SMTP_SERVER,
+    port: 25,
     auth: {
-      user: process.env.MANDRILL_USERNAME,
-      pass: process.env.MANDRILL_APIKEY
+      user: config.POSTMARK_API_TOKEN,
+      pass: config.POSTMARK_API_TOKEN
     }
   };
 }
